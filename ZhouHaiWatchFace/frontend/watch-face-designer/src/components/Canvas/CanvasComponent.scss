@@ -1,0 +1,198 @@
+.canvas-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  .canvas-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      #000;
+
+    .fabric-canvas {
+      border: 2px solid #333;
+      border-radius: 4px;
+      background: #000;
+      cursor: crosshair;
+      
+      &:hover {
+        border-color: #555;
+      }
+    }
+
+    .canvas-overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .canvas-grid {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        background-image: 
+          linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .selection-indicator {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(74, 144, 226, 0.9);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        pointer-events: none;
+        z-index: 10;
+      }
+    }
+  }
+
+  .canvas-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #2a2a2a;
+    border-top: 1px solid #333;
+
+    .control-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: #3a3a3a;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: bold;
+
+      &:hover {
+        background: #4a4a4a;
+        border-color: #666;
+        color: #fff;
+      }
+
+      &:active {
+        background: #333;
+        transform: translateY(1px);
+      }
+
+      &.active {
+        background: #4a90e2;
+        border-color: #4a90e2;
+        color: white;
+
+        &:hover {
+          background: #357abd;
+          border-color: #357abd;
+        }
+      }
+    }
+
+    .zoom-level {
+      min-width: 45px;
+      text-align: center;
+      font-size: 12px;
+      color: #ccc;
+      font-weight: 500;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .canvas-container {
+    .canvas-wrapper {
+      padding: 10px;
+    }
+
+    .canvas-controls {
+      padding: 8px 12px;
+      
+      .control-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+
+      .zoom-level {
+        font-size: 11px;
+        min-width: 40px;
+      }
+    }
+  }
+}
+
+// Dark theme variations
+.canvas-container {
+  // Watch face preview mode
+  &.preview-mode {
+    .canvas-wrapper {
+      background: #000;
+      
+      .fabric-canvas {
+        border-color: #222;
+      }
+    }
+  }
+
+  // Design mode
+  &.design-mode {
+    .canvas-wrapper {
+      .fabric-canvas {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 1px rgba(74, 144, 226, 0.3);
+      }
+    }
+  }
+}
+
+// Animation for smooth interactions
+.canvas-container .fabric-canvas,
+.canvas-container .control-btn {
+  transition: all 0.2s ease;
+}
+
+// Custom scrollbars for canvas area
+.canvas-container .canvas-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.canvas-container .canvas-wrapper::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.canvas-container .canvas-wrapper::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.canvas-container .canvas-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

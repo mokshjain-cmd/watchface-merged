@@ -1,0 +1,68 @@
+﻿<ContentControl x:Class="WatchUI.Views.EditLayerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:vm="clr-namespace:WatchBasic.Tool;assembly=WatchBasic"
+        mc:Ignorable="d"
+        xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:prism="http://prismlibrary.com/"
+        Height="800" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="微软雅黑"
+        prism:ViewModelLocator.AutoWireViewModel="True" >
+    <ContentControl.Resources>
+        <vm:BoolToVisibilityConverter x:Key="booltovis"/>
+    </ContentControl.Resources>
+    <GroupBox Header="{Binding Group.GroupName}" FocusManager.FocusedElement="{Binding ElementName=ValueX}">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Image Source="{Binding ImgPath, TargetNullValue={x:Null}}"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="">
+                    <Border  Background="DarkSalmon">
+                        <Image  Source="{Binding Group.ShowLayer.BitmapSource}"/>
+                    </Border>
+                    
+                </GroupBox>
+                <StackPanel Grid.Column="1" Orientation="Vertical"  Background="Gray">
+                    <StackPanel Orientation="Horizontal">
+                        <material:Chip Content="尺寸" Style="{StaticResource MaterialDesignOutlineChip}" />
+                        <!--<material:Chip Content="{Binding Size}" Style="{StaticResource MaterialDesignOutlineChip}" Cursor="Hand"/>-->
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Group.ShowLayer.Width}" Foreground="{Binding WidthColor,TargetNullValue={x:Null}}"/>
+                            <TextBlock Text=","/>
+                            <TextBlock Text="{Binding Group.ShowLayer.Height}" />
+                        </StackPanel>
+                      
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="ValueX" material:HintAssist.Hint="X" Text="{Binding Group.ShowLayer.Left,UpdateSourceTrigger=PropertyChanged}" GotFocus="TextBox_GotFocus" Width="60" Margin="10 0 0 0"  VerticalAlignment="Bottom" />
+                        <TextBox material:HintAssist.Hint="Y" Text="{Binding Group.ShowLayer.Top,UpdateSourceTrigger=PropertyChanged}" GotFocus="TextBox_GotFocus"  Width="60" Margin="10 0 0 0"  VerticalAlignment="Bottom" />
+                        <TextBox x:Name="colorText" material:HintAssist.Hint="Color" Text="{Binding Group.ShowLayer.ColorDesc}"  Visibility="{Binding IsColorShow,Converter={StaticResource booltovis }}" GotFocus="TextBox_GotFocus"  Width="60" Margin="10 0 0 0"  VerticalAlignment="Bottom" />
+                        <Rectangle Width="60" Fill="{Binding Text, ElementName=colorText}" Visibility="{Binding IsColorShow,Converter={StaticResource booltovis }}" />
+                        <!--<xctk:ColorPicker Width="120" SelectedColor="{Binding Group.ShowLayer.LayerColor}"  Visibility="{Binding Group.ShowLayer.IsPng,Converter={StaticResource booltovis }}"  />-->
+                    </StackPanel>
+                    <StackPanel Height="150" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Margin="20 0 0 0" Command="{Binding Confim}" Cursor="Hand" IsDefault="True">确定</Button>
+                        <Button Margin="20 0 0 0" Command="{Binding Canccel}" Cursor="Hand">取消</Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </GroupBox>
+    
+</ContentControl>

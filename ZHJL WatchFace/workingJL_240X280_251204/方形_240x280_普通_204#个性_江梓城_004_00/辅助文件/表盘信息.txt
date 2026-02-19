@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:渐变圆环
+#表盘描述
+worksDescribe_1:酷炫的你，解开渐变背后的神秘
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Gradient ring
+#表盘描述:
+worksDescribe_0:Cool you, unlock the mystery behind the gradient

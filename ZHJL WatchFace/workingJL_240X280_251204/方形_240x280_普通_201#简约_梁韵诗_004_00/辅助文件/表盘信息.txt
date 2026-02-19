@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:魔法阵
+#表盘描述
+worksDescribe_1:恶魔法阵：现在传送将解除所有黑暗力量
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Magic circle
+#表盘描述:
+worksDescribe_0:Circle of Evil Magic,Teleport will now remove all dark powers

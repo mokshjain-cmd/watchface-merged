@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <shape>circle</shape>
+  <name>1</name>
+  <deviceType>V08</deviceType>
+  <version>1.0.0</version>
+  <size>466x466</size>
+  <author>ZHOU HAI SMART</author>
+  <pkgName>000000</pkgName>
+  <imageFormat>indexed8</imageFormat>
+  <imageCompression>false</imageCompression>
+  <editorVersion>1.0.0</editorVersion>
+  <webVersionCreatedAt>2025-07-05T15:34:27+08:00</webVersionCreatedAt>
+  <editorVersionCreatedAt>2025-07-05T15:34:27+08:00</editorVersionCreatedAt>
+  <webVersionUpdatedAt>2025-07-05T15:38:06+08:00</webVersionUpdatedAt>
+  <editorVersionUpdatedAt>2025-07-05T15:38:06+08:00</editorVersionUpdatedAt>
+  <_recolorEnable>false</_recolorEnable>
+  <HnTheme>
+    <title>The fate of the gear</title>
+    <designer>舟海</designer>
+    <screen>QXHD03</screen>
+    <briefInfo>Gears are an important part of the machinery</briefInfo>
+    <version>qxzhzn.2.0.0</version>
+  </HnTheme>
+</WatchInfo>

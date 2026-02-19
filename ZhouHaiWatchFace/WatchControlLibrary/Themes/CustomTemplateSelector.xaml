@@ -1,0 +1,1162 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userlib="clr-namespace:WatchControlLibrary"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:convert="clr-namespace:WatchControlLibrary.Convert"
+                    x:Class="WatchControlLibrary.Themes.CustomTemplate"
+                    >
+    <convert:AbsoutelySingleConvert x:Key="single"/>
+    <Style TargetType="RadioButton" x:Key="rb">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Name="border" CornerRadius="5">
+                        <TextBlock Name="alignText" Text="{TemplateBinding Content}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#595959" />
+                            <Setter TargetName="alignText" Property="Foreground" Value="white" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ListBox" x:Key="withChangeBtnListbox" BasedOn="{StaticResource MaterialDesignListBox}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid AllowDrop="True"
+                          PreviewMouseLeftButtonDown="KeyValue_PreviewMouseLeftButtonDown"
+                          PreviewMouseLeftButtonUp="KeyValue_PreviewMouseLeftButtonUp"
+                          PreviewMouseMove="KeyValue_PreviewMouseMove"
+                          Drop="KeyValue_Drop">
+                        <Image Name="image" Source="{Binding .,Converter={StaticResource single} }" Width="30" Height="60"/>
+                        <Button Name="btn" Content="Change" Background="#3f3f3f" BorderThickness="0" Padding="0" Height="20" FontSize="10" Visibility="Collapsed"
+       Command="{Binding DataContext.ChangeImageCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+       CommandParameter="{Binding .}"/>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="btn"  Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <userlib:IsShowConverter x:Key="isShow"/>
+    <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="monthday">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="userlib:MonthDayModeEnum" />
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Background="Transparent">
+                        <Path x:Name="path1" Stretch="Fill" Fill="#FF333333" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="path1" Property="Fill" Value="#9d9d9d" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="1">
+                            <Setter TargetName="path1" Property="Data" Value="M96 128h832v96H96zM96 576h832v96H96zM96 352h576v96H96zM96 800h576v96H96z" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="2">
+                            <Setter TargetName="path1" Property="Data" Value="M96 128h832v96H96zM96 576h832v96H96zM224 352h576v96H224zM224 800h576v96H224z" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="3">
+                            <Setter TargetName="path1" Property="Data" Value="M96 128h832v96H96zM96 576h832v96H96zM352 352h576v96H352zM352 800h576v96H352z" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="Background" Value="Red" />-->
+        <Setter Property="Foreground" Value="#FF333333" />
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <DataTemplate x:Key="AlbumBackgroundTemplate">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+           DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Background Image"/>
+                <Button Content="Modify" Margin="50 0 10 0"
+                        Command="{Binding AddImageCommand}" CommandParameter="AlbumBackground"/>
+                <Button Content="Delete"
+                        Command="{Binding AddImageCommand}" CommandParameter="AlbumBackgroundDelete"/>
+            </StackPanel>
+            <Image Source="{Binding SelectBind.BackgroundSource,Converter={StaticResource single}}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragImageTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+           DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <Image Source="{Binding SelectBind.Source,Converter={StaticResource single}}"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragPointTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+       DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <!--<Image Source="{Binding SelectBind.Source,Converter={StaticResource single}}">
+                </Image>-->
+                <!--<Slider x:Name="slider" Maximum = "{Binding SelectBind.EndAngle,Mode=TwoWay}" 
+                        Minimum="{Binding SelectBind.StartAngle,Mode=TwoWay}"
+                        Value="{Binding SelectBind.Value,Mode=TwoWay}"/>-->
+                <Border CornerRadius="20" Background="#313131" Margin="5,15">
+                    <StackPanel>
+                        <!--<TextBlock Text="旋转属性" Margin="3,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Start Angle"  Margin="10, 5" Foreground="#AFAFAF"/>
+                            <TextBox x:Name="textBox1" Width="50" Text="{Binding SelectBind.StartAngle,Mode=TwoWay}"/>
+                            <TextBlock Text="End Angle" Margin="10, 5" Foreground="#AFAFAF"/>
+                            <TextBox x:Name="textBox2" Width="50" Text="{Binding SelectBind.EndAngle,Mode=TwoWay}"/>
+                        </StackPanel>-->
+                        <Grid Margin="5, 10, 5 0">
+                            <TextBlock Text="Time Data"/>
+                            <ComboBox Name="timevalue" SelectedIndex="{Binding SelectBind.ValueIndex}" HorizontalAlignment="Right">
+                                <ComboBoxItem Content="Hour"/>
+                                <ComboBoxItem Content="Minute"/>
+                                <ComboBoxItem Content="Second"/>
+                            </ComboBox>
+                        </Grid>
+                        <TextBlock Text="Rotation Center" Margin="3,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="X Coordinate" Foreground="#AFAFAF" Margin="10,5"/>
+                            <TextBox x:Name="textBox3"  Width="50" Text="{Binding SelectBind.OriginPointX,Mode=TwoWay}"/>
+                            <TextBlock Text="Y Coordinate" Foreground="#AFAFAF" Margin="10, 5"/>
+                            <TextBox x:Name="textBox4" Width="50" Text="{Binding SelectBind.OriginPointY,Mode=TwoWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragNumsTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+           DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Max Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.MaxNum, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" BorderBrush="White" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Current Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.CurrentNum}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <TextBlock Text="Unit Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Unit" Padding="0" Background="Transparent">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.UnitSource,Converter={StaticResource single }}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Text="Negative Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Minus" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.MinusSource,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <Grid>
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+                                    Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image Name="image" Source="{Binding .,Converter={StaticResource single} }" Width="30"/>
+                                        <Button Name="btn" Content="Change" Background="#3f3f3f" BorderThickness="0" Padding="0" Height="20" FontSize="10" Visibility="Collapsed"
+                                                Command="{Binding DataContext.ChangeImageCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="btn"  Property="Visibility" Value="Visible" />
+                                        </Trigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+
+                            </ListBox.ItemTemplate>-->
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragProgressTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+           DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}},Mode=TwoWay}"
+          >
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}"/>
+                        <Grid>
+                            <TextBlock Text="Max Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.MaxNum,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" BorderBrush="White" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="Target Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.TargetValue,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" BorderBrush="White" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="Current Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.CurrentNum,Mode=TwoWay}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="Fill Type" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <ComboBox Name="fill" HorizontalContentAlignment="Right" HorizontalAlignment="Right" SelectedIndex="{Binding SelectBind.FillType}" Width="120">
+                                <ComboBoxItem Content="Numeric Fill"/>
+                                <ComboBoxItem Content="Normal Fill"/>
+                            </ComboBox>
+                        </Grid>
+                        <!--<Grid>-->
+                        <Grid Margin="0 10 0 0">
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding .,Converter={StaticResource single}}"  Width="30"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>-->
+                        </ListBox>
+                        <!--</Grid>-->
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=fill, Path=SelectedIndex}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=fill,Path=SelectedIndex}" Value="1">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock Text="Unit Image: " Margin="0 10"/>
+                            <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Unit" Padding="0" Background="Transparent">
+                                <Button.Content>
+                                    <Image Source="{Binding SelectBind.UnitSource,Converter={StaticResource single }}" Stretch="Fill"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragWeekTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+       DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}},Mode=TwoWay}"
+      >
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="时间" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.SetDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <!--<Grid>-->
+                        <Grid Margin="0 0 0 10">
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding .,Converter={StaticResource single}}"  Width="30"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>-->
+                        </ListBox>
+                        <!--</Grid>-->
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragAMPMTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="时间" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.SetDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+
+                        <TextBlock Text="AM Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="AM" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.AMSource,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Text="PM Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="PM" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.PMSource,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragSwitchTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Status" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.IsOpen}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+
+                        <TextBlock Text="Open Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Open" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.OpenSource,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Text="Close Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Close" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.CloseSource,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragWidgetTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+           DataContext="{Binding Path=DataContext, 
+           RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <Grid Margin="0 10">
+                    <TextBlock Text="Auto Layout" HorizontalAlignment="Left"/>
+                    <CheckBox  HorizontalAlignment="Right" Width="30" Height="30" 
+                               IsChecked="{Binding SelectBind.IsAutoLayout}"
+                               Background="White" Name="auto"/>
+                </Grid>
+                <Grid Margin="0 10">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=auto, Path=IsChecked}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=auto, Path=IsChecked}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="RadioButton" BasedOn="{StaticResource rb}">
+
+                                </Style>
+                            </Grid.Resources>
+                            <RadioButton Content="Left-Right" Background="#313131" BorderThickness="0" Margin="5 10" Height="60"
+                                         IsChecked="{Binding SelectBind.Orientation, Converter={x:Static convert:EqualityConverter.Instance}
+                                ,ConverterParameter={x:Static userlib:Orientation.Horizontal}}" 
+                                          />
+                            <RadioButton Content="Up-Down" Background="#313131" Grid.Column="1" BorderThickness="0" Margin="5 10" Height="60"
+                                                  IsChecked="{Binding SelectBind.Orientation, Converter={x:Static convert:EqualityConverter.Instance}
+                                                  ,ConverterParameter={x:Static userlib:Orientation.Vertical}}" 
+                                         />
+                        </Grid>
+                        <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="5 0 5 10">
+                            <Grid>
+                                <TextBlock Text="Spacing" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding SelectBind.Spacing }" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <Border  Grid.Column="1" Padding="10 10" CornerRadius="10" Background="#313131" Margin="0">
+
+                        <UniformGrid  Columns="3">
+                            <UniformGrid.Resources>
+                                <Style TargetType="RadioButton" BasedOn="{StaticResource rb}">
+                                </Style>
+                            </UniformGrid.Resources>
+                            <RadioButton  Content="Top-Left" IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.TopLeft}}"  />
+                            <RadioButton  Content="Top"    IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.Top}}"/>
+                            <RadioButton  Content="Top-Right"  IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.TopRight}}"/>
+                            <RadioButton  Content="Left"    IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.Left}}"/>
+                            <RadioButton  Content="Center"   IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.Center}}"/>
+                            <RadioButton  Content="Right"   IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.Right}}"/>
+                            <RadioButton  Content="Bottom-Left"  IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.BottomLeft}}"/>
+                            <RadioButton  Content="下"    IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.Bottom}}"/>
+                            <RadioButton  Content="右下"  IsChecked="{Binding SelectBind.Direction,
+                                Converter={x:Static convert:EqualityConverter.Instance},ConverterParameter={x:Static userlib:Direction.BottomRight}}"/>
+                        </UniformGrid>
+                    </Border>
+                </Grid>
+                <TextBlock Text="应用与数据项" Margin="0 10"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="0 10">
+                    <Grid>
+                        <TextBlock Text="跳转应用"/>
+                        <ComboBox HorizontalAlignment="Right" Width="170" SelectedIndex="0"
+                                   DisplayMemberPath="Value"  SelectedValuePath="Key" ItemsSource="{Binding AppData}" SelectedItem="{Binding SelectBind.AppData}"/>
+                    </Grid>
+                </Border>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="0 10">
+                    <Grid>
+                        <TextBlock Text="关联数据项"/>
+                        <ComboBox HorizontalAlignment="Right" Width="170" SelectedIndex="0"
+                                  ItemsSource="{Binding AssociatedData}" SelectedItem="{Binding SelectBind.AssociatedData}"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragNormalDateTimeTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="时间" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.SetDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Time Format" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.DateTimeFormat}" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Leading Zero: "/>
+                            <!--<CheckBox IsChecked="{Binding SelectBind.LeadingZero}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" Padding="0"/>-->
+                            <ToggleButton IsChecked="{Binding SelectBind.LeadingZero}"  HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="IsLeadingZero"/>
+                        </Grid>
+                        <TextBlock Text="Unit Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="TimeUnit" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.UnitIcon,Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <Grid>
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding .,Converter={StaticResource single}}"  Width="30"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>-->
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragMonthDayTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="时间" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.SetDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Leading Zero: "/>
+                            <ToggleButton IsChecked="{Binding SelectBind.LeadingZero}"  HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="IsLeadingZero"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="格式: "/>
+                            <ComboBox  ItemsSource="{Binding Source={StaticResource monthday}}" SelectedItem="{Binding SelectBind.MonthDayMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="200"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectBind.MonthDayMode}" Value="split">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock Text="Separator: " Margin="0 10"/>
+                            <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="UnitIcon" Padding="0">
+                                <!--<Button.Background>
+                                    <DrawingBrush>
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush  Color="#bfbfbf"/>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                        <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                        <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Button.Background>-->
+                                <Button.Content>
+                                    <Image Source="{Binding SelectBind.UnitIcon,Converter={StaticResource single}}" Stretch="Fill"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectBind.MonthDayMode}" Value="unit">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock Text="Month Unit: " Margin="0 10"/>
+                            <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="MonthIcon" Padding="0">
+                                <!--<Button.Background>
+                                    <DrawingBrush>
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush  Color="#bfbfbf"/>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                        <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                        <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Button.Background>-->
+                                <Button.Content>
+                                    <Image Source="{Binding SelectBind.MonthIcon,Converter={StaticResource single}}" Stretch="Fill"/>
+                                </Button.Content>
+                            </Button>
+
+                            <TextBlock Grid.Row="1" Text="Day Unit: " Margin="0 10"/>
+                            <Button Grid.Row="1" Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="DayIcon" Padding="0">
+                                <!--<Button.Background>
+                                    <DrawingBrush>
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush  Color="#bfbfbf"/>
+                                                </GeometryDrawing.Brush>
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                        <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                        <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Button.Background>-->
+                                <Button.Content>
+                                    <Image Source="{Binding SelectBind.DayIcon,Converter={StaticResource single}}" Stretch="Fill"/>
+                                </Button.Content>
+                            </Button>
+
+                        </Grid>
+
+
+                        <Grid>
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding .,Converter={StaticResource single}}"  Width="30"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>-->
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragSingleDigitTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+     DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10" Visibility="{Binding SelectBind.SetDateTime, Converter={StaticResource isShow}}">
+                            <TextBlock Text="Time" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.SetDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10" Visibility="{Binding SelectBind.CurrentNum, Converter={StaticResource isShow}}">
+                            <TextBlock Text="值" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.CurrentNum}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="数据来源" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.DateTimeFormat}" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ., Converter={StaticResource  single}}"  Width="30"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>-->
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragDoubleTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+       DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}" Margin="0 10"/>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Max Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.MaxNum}" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="Current Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.CurrentNum}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="小数点偏移" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.DecimalOffsetX, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="0 10">
+                            <TextBlock Text="后尾补零: "/>
+                            <!--<CheckBox IsChecked="{Binding SelectBind.LeadingZero}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" Padding="0"/>-->
+                            <ToggleButton IsChecked="{Binding SelectBind.TrailingZero}"  HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="IsLeadingZero"/>
+                        </Grid>
+                        <TextBlock Text="Unit Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="DoubleUnit" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.UnitSource, Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Text="小数点Image: " Margin="0 10"/>
+                        <Button Margin="0 0 0 10" Width="50" Height="50" BorderThickness="0" Command="{Binding AddImageCommand}" CommandParameter="Point" Padding="0">
+                            <!--<Button.Background>
+                                <DrawingBrush>
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush  Color="#bfbfbf"/>
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <PathGeometry Figures="M777.52 929.11H248.71c-41.66 0-75.54-33.9-75.54-75.54V173.69c0-41.64 33.88-75.54 75.54-75.54h396.61c10.7 0 20.91 4.54 28.07 12.5L843.36 299.5c6.23 6.93 9.7 15.93 9.7 25.27v528.79c0 41.65-33.9 75.55-75.54 75.55zM248.71 173.69v679.87h528.81V339.27L628.5 173.69H248.71z"/>
+                                                    <PathGeometry Figures="M513.12 759.14c-20.88 0-37.77-16.89-37.77-37.77v-264.4c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77v264.4c0 20.88-16.89 37.77-37.77 37.77z"/>
+                                                    <PathGeometry Figures="M645.32 626.94h-264.4c-20.88 0-37.77-16.89-37.77-37.77s16.89-37.77 37.77-37.77h264.4c20.88 0 37.77 16.89 37.77 37.77s-16.9 37.77-37.77 37.77zM815.29 362.55H626.43c-20.88 0-37.77-16.89-37.77-37.77V135.92c0-20.88 16.89-37.77 37.77-37.77s37.77 16.89 37.77 37.77V287h151.08c20.88 0 37.77 16.89 37.77 37.77s-16.89 37.78-37.76 37.78z"/>
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Button.Background>-->
+                            <Button.Content>
+                                <Image Source="{Binding SelectBind.PointSource, Converter={StaticResource single}}" Stretch="Fill"/>
+                            </Button.Content>
+                        </Button>
+                        <Grid>
+                            <TextBlock Text="Image: "/>
+                            <Button Content="Add Image" HorizontalAlignment="Right" BorderThickness="0" Background="Gray"
+              Command="{Binding AddImageSourceCommand}" CommandParameter="{Binding SelectBind.ImageSource}"/>
+                        </Grid>
+                        <ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+                            <!--<ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid   Columns="5" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ., Converter={StaticResource single}}"  Width="30"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>-->
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragKeyValueTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+       DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}},Mode=TwoWay}">
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectBind.DragName}"/>
+                        <Grid>
+                            <TextBlock Text="Max Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.MaxNum,Mode=TwoWay}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="Current Value" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.CurrentNum,Mode=TwoWay}" IsReadOnly="True" HorizontalAlignment="Right" BorderThickness="0" Width="80" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Image: "/>
+                                <ListBox Height="500" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemsSource="{Binding SelectBind.ValueDataImages}" HorizontalContentAlignment="Right" Tag="{Binding SelectBind}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid  Columns="5" HorizontalAlignment="Right"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel AllowDrop="True"
+                                                        PreviewMouseLeftButtonDown="KeyValue_PreviewMouseLeftButtonDown"
+                                                        PreviewMouseLeftButtonUp="KeyValue_PreviewMouseLeftButtonUp"
+                                                        PreviewMouseMove="KeyValue_PreviewMouseMove"
+                                                        Drop="KeyValue_Drop">
+                                                <Grid>
+                                                    <Image Source="{Binding Value, Converter={StaticResource single}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                                                           Width="36" />
+                                                    <Button Name="btn" Content="Change" Background="#3f3f3f" BorderThickness="0" Padding="0" Height="20" FontSize="10" Visibility="Collapsed"
+                                                            Command="{Binding DataContext.ChangeImageCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                            CommandParameter="{Binding Key}"/>
+                                                </Grid>
+                                                <TextBlock Text="{Binding Key}" ToolTip="{Binding Key}"/>
+                                            </StackPanel>
+                                            <DataTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="btn"  Property="Visibility" Value="Visible" />
+                                                </Trigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragSlotTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+      DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}},Mode=TwoWay}">
+            <ScrollViewer Height="{Binding RelativeSource={RelativeSource AncestorType=ContentControl}, Path=ActualHeight}" VerticalScrollBarVisibility="Hidden">
+                <StackPanel>
+                    <TextBlock Text="Bind Data"/>
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131">
+                        <StackPanel>
+                            <TextBlock Text="特性"/>
+                            <Grid Margin="0 10 0 0">
+                                <TextBlock Text="容器类型" VerticalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding SelectBind.SlotTypeData}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding SelectBind.SlotType}"
+                                       SelectedIndex="0"   HorizontalAlignment="Right" Width="110"/>
+                            </Grid>
+                            <Grid Margin="0 10 0 0">
+                                <TextBlock Text="当前显示" VerticalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding SelectBind.SubItems}" DisplayMemberPath="DragName"
+                                       SelectedIndex="{Binding SelectBind.ShowItemIndex}"  HorizontalAlignment="Right" Width="110"/>
+                            </Grid>
+                            <StackPanel>
+                                <!--暂时不用-->
+                                <!--<Grid Margin="0 10 0 0">
+                                    <TextBlock Text="可选无" VerticalAlignment="Center"/>
+                                    <ToggleButton IsChecked="{Binding SelectBind.HasNull}" HorizontalAlignment="Right"/>
+                                </Grid>-->
+                                <Grid Margin="0 10 0 0">
+                                    <TextBlock Text="自定义位置" VerticalAlignment="Center"/>
+                                    <ToggleButton IsChecked="{Binding SelectBind.IsCustomPos}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ListBox ItemsSource="{Binding SelectBind.Positions}" SelectedIndex="{Binding SelectBind.ShowPosIndex}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox IsChecked="{Binding CurSlotPosition}" IsEnabled="False"/>
+                                                    <Button Content="添加" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.AddPostionCommand}"  
+                                                        Margin="10 0 5 0" Width="40" Padding="0"/>
+                                                    <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeletePostionCommand}"
+                                                        CommandParameter="{Binding .}" Width="40" Padding="0"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="X" VerticalAlignment="Center" Margin="5 0"/>
+                                                    <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Y" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                                                    <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <!--<TextBlock Text="容器列表"/>
+                            <ListBox ItemsSource="{Binding SelectBind.SubItems}">
+                                
+                            </ListBox>-->
+                                <TextBlock Text="小部件边框图"/>
+                                <ListBox ItemsSource="{Binding SelectBind.SubItems}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="Gray" CornerRadius="5">
+                                                <Grid>
+                                                    <TextBlock  Text="{Binding DragName}" VerticalAlignment="Center"/>
+                                                    <Button Width="40" Height="40" BorderThickness="0" Command="{Binding DataContext.AddEditBoxCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}" Padding="0" HorizontalAlignment="Right">
+                                                        <Button.Content>
+                                                            <Image Source="{Binding EditBox, Converter={StaticResource single}}" Stretch="Fill"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <TextBlock Text="小部件预览图"/>
+                                <ListBox ItemsSource="{Binding SelectBind.SubItems}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="Gray" CornerRadius="5">
+                                                <Grid>
+                                                    <TextBlock  Text="{Binding DragName}" VerticalAlignment="Center"/>
+                                                    <Button Width="40" Height="40" BorderThickness="0" Command="{Binding DataContext.AddPreviewCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}" Padding="0" HorizontalAlignment="Right">
+                                                        <Button.Content>
+                                                            <Image Source="{Binding Preview, Converter={StaticResource single}}" Stretch="Fill"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BindDragAnimFrameTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}},Mode=TwoWay}"
+>
+            <StackPanel>
+                <TextBlock Text="Bind Data"/>
+                <StackPanel>
+
+                    <TextBlock Text="填充" Margin="10 3"/>
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="10 3">
+                        <Grid Margin="0 3">
+                            <Button  Content="更换动图" Command="{Binding AnimSourceChangeCommand}"/>
+                        </Grid>
+                    </Border>
+
+                    <!--<TextBlock Text="播放" Margin="10 3"/>
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="10 3">
+                        <Grid Margin="0 3"  >
+                            <TextBlock Text="默认显示: " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Button Command="{Binding ShowAnimFrameCommand}" BorderThickness="0" Width="100" HorizontalAlignment="Right" HorizontalContentAlignment="Right">
+                                <Image Source="{Binding SelectBind.IndexSource ,Converter={StaticResource single}}"  Width="auto" Height="auto" MaxHeight="70" MaxWidth="35" />
+                            </Button>
+                        </Grid>
+                    </Border>-->
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="10 3">
+                        <Grid Margin="0 3"  >
+                            <TextBlock Text="重复播放: " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ToggleButton HorizontalAlignment="Right" VerticalAlignment="Center"  IsChecked="{Binding SelectBind.IsRepeat}"/>
+                        </Grid>
+                    </Border>
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="10 3">
+                        <Grid Margin="0 3"  >
+                            <TextBlock Text="播放次数: " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBox  Foreground="White"  Text="{Binding SelectBind.RepeatCount}" HorizontalAlignment="Right" BorderThickness="0" Width="100" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                    <Border Padding="10 10" CornerRadius="10" Background="#313131" Margin="10 3">
+                        <Grid Margin="0 3"  >
+                            <TextBlock Text="帧率: " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding SelectBind.FrameRate}" Foreground="White" IsReadOnly="False" HorizontalAlignment="Right" BorderThickness="0" Width="200" HorizontalContentAlignment="Right"/>
+                        </Grid>
+                    </Border>
+
+
+                    <!--<ListBox ItemsSource="{Binding SelectBind.ImageSource}" Style="{StaticResource withChangeBtnListbox}">
+            </ListBox>-->
+
+                </StackPanel>
+
+                <TextBlock Text="预览" Margin="10 3"/>
+                <Button Content="预览" HorizontalAlignment="Center" Command="{Binding AnimPlayCommand}" BorderThickness="0" Background="Gray" Width="200"/>
+
+            </StackPanel>
+        </Grid>
+
+    </DataTemplate>
+</ResourceDictionary>

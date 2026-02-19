@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:月球
+#表盘描述
+worksDescribe_1:登上月球，去探索宇宙与时间的奥秘
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Moon
+#表盘描述:
+worksDescribe_0:Go to the moon to explore the mysteries of the universe and time

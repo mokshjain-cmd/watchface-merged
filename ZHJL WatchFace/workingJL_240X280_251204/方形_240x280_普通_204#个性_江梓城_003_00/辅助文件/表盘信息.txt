@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:圆·碰撞
+#表盘描述
+worksDescribe_1:各种不同颜色及大小的圆碰撞在一起，舒适与自在	
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Circle · collision
+#表盘描述:
+worksDescribe_0:Different colors and sizes of the circle collide together, comfortable and comfortable.

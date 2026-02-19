@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:掌舵
+#表盘描述
+worksDescribe_1:打破平淡，由己掌舵
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Steer
+#表盘描述:
+worksDescribe_0:Break the insipidity and take the helm by yourself

@@ -1,0 +1,55 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WatchControlLibrary">
+    <Style TargetType="local:DragDataBase">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DragDataBase">
+                    <Canvas x:Name="PART_Canvas" Background="Transparent">
+
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:DragImageSource" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+
+
+    <Style TargetType="local:DragNums" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+     
+    </Style>
+   
+    <Style TargetType="local:DragProgress" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragWeek" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragAMPM" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragSwitch" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragImage" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragWidget" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragNormalDateTime" BasedOn="{StaticResource {x:Type local:DragDataBase}}">
+
+    </Style>
+    <Style TargetType="local:DragMonthDay" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    <Style TargetType="local:DragDouble" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    <Style TargetType="local:DragKeyValue" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    <Style TargetType="local:DragSlot" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    
+    <Style TargetType="local:DragPoint" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    <Style TargetType="local:DragAnimFrame" BasedOn="{StaticResource {x:Type local:DragDataBase}}"/>
+    <Style TargetType="local:RatioSlider" BasedOn="{StaticResource {x:Type Slider}}"/>
+    <Style TargetType="local:TreeViewEx" BasedOn="{StaticResource {x:Type TreeView}}"/>
+</ResourceDictionary>

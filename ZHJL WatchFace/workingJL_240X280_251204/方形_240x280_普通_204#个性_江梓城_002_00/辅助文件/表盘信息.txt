@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:镭射光
+#表盘描述
+worksDescribe_1:最快的刀”、“最准的尺”、“最亮的光
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Laser
+#表盘描述:
+worksDescribe_0:"The fastest knife", "the most accurate ruler", "the brightest light"

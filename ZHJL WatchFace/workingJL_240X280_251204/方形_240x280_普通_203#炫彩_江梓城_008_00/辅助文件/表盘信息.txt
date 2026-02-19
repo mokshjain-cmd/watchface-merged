@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:麦田
+#表盘描述
+worksDescribe_1:宽广的麦田，清新的空气，一切都是无比的幸福
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Catcher
+#表盘描述:
+worksDescribe_0:Broad wheat fields, fresh air, everything is incomparable happiness

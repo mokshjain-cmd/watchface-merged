@@ -1,0 +1,204 @@
+.preview-view {
+  display: flex;
+  height: 100%;
+  min-height: 0; /* Fix for flex child overflow */
+}
+
+/* Specific styling for preview mode to maximize space */
+.preview-view .main-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.preview-view .canvas-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem; /* Minimal padding for preview */
+  min-height: 0;
+  overflow: auto; /* Allow scrolling if watch face is too big */
+}
+
+.preview-view .watch-canvas {
+  transform: scale(0.85); /* Scale down watch face in preview to fit better */
+  transform-origin: center center;
+}
+
+.playback-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #404040;
+  border: 1px solid #505050;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: #505050;
+  border-color: #606060;
+}
+
+.control-btn.active {
+  background: #0066cc;
+  border-color: #0080ff;
+}
+
+.simulation-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.control-group {
+  background: #2a2a2a;
+  border: 1px solid #404040;
+  border-radius: 6px;
+  padding: 0.75rem; /* Slightly reduced padding */
+}
+
+.control-group h4 {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #404040;
+  padding-bottom: 0.5rem;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Reduced gap to fit better */
+  margin-bottom: 0.75rem;
+  width: 100%; /* Ensure full width usage */
+}
+
+.control-row:last-child {
+  margin-bottom: 0;
+}
+
+.control-row label {
+  font-size: 0.875rem;
+  color: #cccccc;
+  min-width: 70px; /* Reduced from 80px to save space */
+  font-weight: 500;
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.control-row span {
+  font-size: 0.875rem;
+  color: #ffffff;
+  min-width: 50px; /* Reduced from 60px but ensure visibility */
+  text-align: right;
+  font-weight: 600;
+  flex-shrink: 0; /* Prevent value from shrinking */
+}
+
+.slider {
+  flex: 1;
+  min-width: 0; /* Allow slider to shrink if needed */
+  height: 6px;
+  background: #333333;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0 0.25rem; /* Small margin to prevent crowding */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #0066cc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #0080ff;
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0066cc;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #0080ff;
+  transform: scale(1.1);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem; /* Reduced from 0.75rem 1.5rem */
+  background: #2d2d2d;
+  border-bottom: 1px solid #404040;
+  flex-shrink: 0; /* Prevent header from shrinking */
+  min-height: 40px; /* Fixed minimum height */
+}
+
+.preview-header h3 {
+  margin: 0;
+  font-size: 1rem; /* Slightly smaller font */
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.preview-info {
+  display: flex;
+  gap: 1rem; /* Reduced gap */
+  font-size: 0.8rem; /* Smaller font size */
+  color: #cccccc;
+}
+
+.preview-component {
+  pointer-events: none;
+  border-radius: 2px;
+  z-index: 10; /* Ensure components stay above background */
+}
+
+/* Special styling for preview mode */
+.watch-canvas {
+  background: radial-gradient(circle at center, #111111 0%, #000000 100%);
+  position: relative; /* Ensure proper positioning context */
+}
+
+.control-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #0066cc;
+  cursor: pointer;
+}
+
+.help-text {
+  font-size: 0.75rem;
+  color: #888888;
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+  line-height: 1.4;
+}

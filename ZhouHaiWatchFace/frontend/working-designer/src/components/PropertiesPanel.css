@@ -1,0 +1,152 @@
+.properties-panel {
+  width: 300px;
+  background: #333;
+  border-left: 1px solid #404040;
+  display: flex;
+  flex-direction: column;
+}
+
+.properties-header {
+  padding: 20px;
+  border-bottom: 1px solid #404040;
+  background: #2d2d2d;
+}
+
+.properties-header h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.element-type {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.properties-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.no-selection {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.property-section {
+  margin-bottom: 30px;
+}
+
+.property-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.property-item {
+  margin-bottom: 15px;
+}
+
+.property-item label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.property-item input,
+.property-item select {
+  width: 100%;
+  padding: 8px 12px;
+  background: #404040;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+.property-item input:focus,
+.property-item select:focus,
+.property-item textarea:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.property-item textarea {
+  width: 100%;
+  padding: 8px 12px;
+  background: #404040;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.color-input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.color-picker-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-controls {
+  margin-top: 5px;
+}
+
+.shadow-controls .btn {
+  width: 100%;
+}
+
+.range-value {
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 8px;
+}
+
+.close-picker {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background: #007acc;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}

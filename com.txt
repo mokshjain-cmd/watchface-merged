@@ -1,0 +1,2 @@
+cd "C:\Users\tanmay.pawar\Downloads\merging"; .\start-all-servers.ps1
+

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyTitle>Noise Image Processing Tools</AssemblyTitle>
+    <Product>Noise Watch Face Tool</Product>
+    <Company>Noise</Company>
+    <Copyright>Copyright © Noise 2025</Copyright>
+    <AssemblyDescription>Image Processing Tools by Noise</AssemblyDescription>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
+    <PackageReference Include="Emgu.CV.Bitmap" Version="4.7.0.5276" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.7.0.5276" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WatchControlLibrary\WatchControlLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

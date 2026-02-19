@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:机械革命
+#表盘描述
+worksDescribe_1:机械猫头鹰的使命就是播报时间
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Mechanical Revolution
+#表盘描述:
+worksDescribe_0:The Mechanical Owl's mission is to tell the time

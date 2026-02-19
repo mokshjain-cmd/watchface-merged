@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="WatchUI.Views.Information"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             mc:Ignorable="d" 
+             Height="450" Width="800">
+    <Grid >
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="提示:" FontSize="30"/>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding WatchDescs}" VerticalAlignment="Center" Margin=" 0 -20 0 0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin=" 0 20 0 0">
+                            <TextBlock Text="{Binding Language}" FontSize="20"/>
+                            <TextBlock Text="{Binding WatchName,StringFormat=表盘名称: {0}}" TextWrapping="Wrap" FontSize="14"/>
+                            <TextBlock Text="{Binding Description,StringFormat=表盘描述: {0}}" TextWrapping="Wrap" FontSize="14" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="表盘分类" FontSize="20"/>
+                <TextBlock Text="{Binding Desc,StringFormat=分类: {0}}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="确定" Command="{Binding Confim}" Cursor="Hand"  IsDefault="True"/>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

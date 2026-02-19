@@ -1,0 +1,222 @@
+[
+    {
+        "ProjectName": "390*450",
+        "Width": 390,
+        "Height": 450,
+        "ThumbnailWidth": 262,
+        "ThumbnailHeight": 303,
+        "ThumbnailX": 64,
+        "ThumbnailY": 74,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "240*280",
+        "Width": 240,
+        "Height": 280,
+        "ThumbnailWidth": 156,
+        "ThumbnailHeight": 182,
+        "ThumbnailX": 42,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "466*466",
+        "Width": 466,
+        "Height": 466,
+        "ThumbnailWidth": 310,
+        "ThumbnailHeight": 310,
+        "ThumbnailX": 78,
+        "ThumbnailY": 78,
+        "MaxValue": 1920
+    },
+    {
+        "ProjectName": "410*502",
+        "Width": 410,
+        "Height": 502,
+        "ThumbnailWidth": 274,
+        "ThumbnailHeight": 336,
+        "ThumbnailX": 68,
+        "ThumbnailY": 83,
+        "MaxValue": 1920
+    },
+    {
+        "ProjectName": "228*460",
+        "Width": 228,
+        "Height": 460,
+        "ThumbnailWidth": 160,
+        "ThumbnailHeight": 323,
+        "ThumbnailX": 34,
+        "ThumbnailY": 69,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "128*220",
+        "Width": 128,
+        "Height": 220,
+        "ThumbnailWidth": 94,
+        "ThumbnailHeight": 162,
+        "ThumbnailX": 17,
+        "ThumbnailY": 29,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "135*240",
+        "Width": 135,
+        "Height": 240,
+        "ThumbnailWidth": 92,
+        "ThumbnailHeight": 164,
+        "ThumbnailX": 22,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "240*240",
+        "Width": 240,
+        "Height": 240,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 164,
+        "ThumbnailX": 38,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "320*320",
+        "Width": 320,
+        "Height": 320,
+        "ThumbnailWidth": 220,
+        "ThumbnailHeight": 220,
+        "ThumbnailX": 50,
+        "ThumbnailY": 50,
+        "MaxValue": 1024
+    },
+    {
+        "ProjectName": "360*360",
+        "Width": 360,
+        "Height": 360,
+        "ThumbnailWidth": 254,
+        "ThumbnailHeight": 254,
+        "ThumbnailX": 53,
+        "ThumbnailY": 53,
+        "MaxValue": 1000
+    },
+    {
+        "ProjectName": "320*385",
+        "Width": 320,
+        "Height": 385,
+        "ThumbnailWidth": 220,
+        "ThumbnailHeight": 265,
+        "ThumbnailX": 50,
+        "ThumbnailY": 60,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "454*454",
+        "Width": 454,
+        "Height": 454,
+        "ThumbnailWidth": 310,
+        "ThumbnailHeight": 310,
+        "ThumbnailX": 72,
+        "ThumbnailY": 72,
+        "MaxValue": 1920
+    },
+    {
+        "ProjectName": "240*198",
+        "Width": 240,
+        "Height": 198,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 135,
+        "ThumbnailX": 38,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "240*204",
+        "Width": 240,
+        "Height": 204,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 139,
+        "ThumbnailX": 38,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "240*210",
+        "Width": 240,
+        "Height": 210,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 144,
+        "ThumbnailX": 38,
+        "ThumbnailY": 38,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "356*400",
+        "Width": 356,
+        "Height": 400,
+        "ThumbnailWidth": 252,
+        "ThumbnailHeight": 280,
+        "ThumbnailX": 52,
+        "ThumbnailY": 60,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "360*400",
+        "Width": 360,
+        "Height": 400,
+        "ThumbnailWidth": 252,
+        "ThumbnailHeight": 280,
+        "ThumbnailX": 54,
+        "ThumbnailY": 60,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "368*448",
+        "Width": 368,
+        "Height": 448,
+        "ThumbnailWidth": 256,
+        "ThumbnailHeight": 312,
+        "ThumbnailX": 56,
+        "ThumbnailY": 68,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "400*454",
+        "Width": 400,
+        "Height": 454,
+        "ThumbnailWidth": 272,
+        "ThumbnailHeight": 309,
+        "ThumbnailX": 64,
+        "ThumbnailY": 73,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "320*380",
+        "Width": 320,
+        "Height": 380,
+        "ThumbnailWidth": 220,
+        "ThumbnailHeight": 262,
+        "ThumbnailX": 50,
+        "ThumbnailY": 59,
+        "MaxValue": 1536
+    },
+    {
+        "ProjectName": "240*296",
+        "Width": 240,
+        "Height": 296,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 202,
+        "ThumbnailX": 38,
+        "ThumbnailY": 47,
+        "MaxValue": 512
+    },
+    {
+        "ProjectName": "240*280_44",
+        "Width": 240,
+        "Height": 280,
+        "ThumbnailWidth": 164,
+        "ThumbnailHeight": 191,
+        "ThumbnailX": 38,
+        "ThumbnailY": 45,
+        "MaxValue": 512
+    }
+]

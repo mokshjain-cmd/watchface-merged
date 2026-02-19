@@ -1,0 +1,33 @@
+ .\BinGeneratorBackend.exe "D:\Downloads\My Watch Face_2025-11-13T09-34-30\My Watch Face_2025-11-13T09-34-30\My Watch Face.json" "D:\Downloads\ZhouHaiWatchFace\5output_test_fixed.bin"
+
+
+D:\Downloads\ZhouHaiWatchFace\ZhouHaiWatchFace\ZhouHaiWatchFace\BinGeneratorBackend\bin\Debug\net6.0-windows
+
+dotnet run --project WatchFaceBackendAPI.csproj 
+
+
+Remove-Item -Recurse -Force obj, bin -ErrorAction SilentlyContinue
+
+cd "D:\Downloads\ZhouHaiWatchFace\WatchControlLibrary"; Remove-Item -Recurse -Force obj, bin -ErrorAction SilentlyContinue
+
+heart rate
+blood oxygen
+battery
+steps
+calories
+digital time- hour minute seconds
+
+leading zeroes
+
+
+front back layer intergration
+select file shoulf be a pop up
+preview should only enable the added components
+
+everything is working great, now add one more functionality that is already there in the windows app
+
+firstly, make the "select file" option open up as a pop up 
+
+the reason to make the "select file" option as a pop up is so that we can add a drag-layer platform
+
+as you may see in the windows app

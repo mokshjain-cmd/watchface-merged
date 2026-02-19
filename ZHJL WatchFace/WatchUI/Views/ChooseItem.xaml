@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="WatchUI.Views.ChooseItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="500">
+    <GroupBox>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Name="listbox" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding TypeItems}" SelectionMode="Multiple" ItemContainerStyle="{StaticResource MyListBoxItemStyle}" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Width="80" Height="80" Source="{Binding DesignSketch.ImgPath}" Cursor="Hand"/>
+                            <TextBlock Text="{Binding WatchTitle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="1">
+                <StackPanel  Orientation="Vertical"  Background="Gray">
+                    <StackPanel Height="150" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Margin="20 0 0 0" Command="{Binding Confim}" CommandParameter="{Binding ElementName=listbox,Path=SelectedItems}" Cursor="Hand" IsDefault="True">确定</Button>
+                        <Button Margin="20 0 0 0" Command="{Binding Canccel}" Cursor="Hand">取消</Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </GroupBox>
+</UserControl>

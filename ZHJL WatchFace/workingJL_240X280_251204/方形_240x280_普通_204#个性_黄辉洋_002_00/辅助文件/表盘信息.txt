@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:运动
+#表盘描述
+worksDescribe_1:生命在于运动
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Movement
+#表盘描述:
+worksDescribe_0:Life lies in movement

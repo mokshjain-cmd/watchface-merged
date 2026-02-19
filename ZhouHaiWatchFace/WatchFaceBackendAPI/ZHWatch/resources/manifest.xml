@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Watchface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="1" width="466" height="466" id="7d7a0e9c91914d38987c28fc152a22f1" SKU="false" compressMethod="None" editable="false" _deviceType="0">
+  <Resources>
+    <Image name="yCWPEC" src="_preview\style1.png" compressMethod="None" format="indexed8" />
+    <Image name="3jAfUJ" src="250705153458548.png" compressMethod="None" format="indexed8" />
+    <Image name="oOPgoI" src="ezip/250705153556295.png" compressMethod="None" format="indexed8" />
+    <Image name="fxV429" src="ezip/250705153630005.png" compressMethod="None" format="indexed8" />
+    <Image name="JQWGV4" src="ezip/250705153749373.png" compressMethod="None" format="indexed8" />
+    <DataItemPointer name="2TuX9D" source="timeHour" ref="@oOPgoI" supportRecolor="false" pivotX="13" pivotY="233" renderRule="alwaysShow" parameter="1000" angleStart="0" angleRange="720" valueStart="0" valueRange="24" />
+    <DataItemPointer name="ZQvhx2" source="timeMinute" ref="@fxV429" supportRecolor="false" pivotX="13" pivotY="233" renderRule="alwaysShow" parameter="1000" angleStart="0" angleRange="360" valueStart="0" valueRange="60" />
+    <DataItemPointer name="sRAyVO" source="timeSecond" ref="@JQWGV4" supportRecolor="false" pivotX="17" pivotY="233" renderRule="alwaysShow" parameter="1000" angleStart="0" angleRange="360" valueStart="0" valueRange="60" />
+  </Resources>
+  <Theme type="normal" name="44srer" bgColor="#000000" isPhotoAlbumWatchface="false" preview="@yCWPEC">
+    <Layout _id="G0QJAL" ref="@3jAfUJ" x="0" y="0" />
+    <Layout _id="6Ht3Yw" ref="@2TuX9D" x="220" y="0" />
+    <Layout _id="PJ6EE0" ref="@ZQvhx2" x="220" y="0" />
+    <Layout _id="gw3wDA" ref="@sRAyVO" x="216" y="0" />
+  </Theme>
+</Watchface>

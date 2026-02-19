@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:漩涡星系
+#表盘描述
+worksDescribe_1:漩涡星系核是由很多既热又年轻的恒星组成，如果天空足够黑暗，就能看见清晰的星系漩涡
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Spiral galaxy
+#表盘描述:
+worksDescribe_0:Swirling galactic nuclei are made up of many hot and young stars. If the sky is dark enough, we can see clear swirling galaxies

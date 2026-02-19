@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:活力四射
+#表盘描述
+worksDescribe_1:让自己看起来活力四射，充满乐趣
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Energetic
+#表盘描述:
+worksDescribe_0:Makes you look like you have great energy and are fun

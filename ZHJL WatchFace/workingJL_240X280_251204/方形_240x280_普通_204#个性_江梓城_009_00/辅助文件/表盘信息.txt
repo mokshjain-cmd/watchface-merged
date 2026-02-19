@@ -1,0 +1,22 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:波浪时光
+#表盘描述
+worksDescribe_1:翻滚的波浪
+
+
+
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Wave time
+
+
+
+#表盘描述:
+worksDescribe_0:Rolling waves
+

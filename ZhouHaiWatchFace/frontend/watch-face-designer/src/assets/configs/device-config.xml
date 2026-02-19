@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfItemMenuViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ItemMenuViewModel>
+    <Item>
+      <Name>A</Name>
+      <DeviceType>B</DeviceType>
+      <Width>390</Width>
+      <Height>450</Height>
+      <ThumbnailWidth>220</ThumbnailWidth>
+      <ThumbnailHeight>220</ThumbnailHeight>
+      <Corner>5</Corner>
+    </Item>
+    <IsSelected>false</IsSelected>
+  </ItemMenuViewModel>
+</ArrayOfItemMenuViewModel>

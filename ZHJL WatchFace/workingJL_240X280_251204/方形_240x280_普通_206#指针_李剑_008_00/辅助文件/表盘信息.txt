@@ -1,0 +1,18 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:年轮
+
+#表盘描述
+worksDescribe_1:曾幻想过永恒
+
+
+#=====英文=====
+
+#表盘名称
+worksName_0:annual ring
+
+#表盘描述:
+worksDescribe_0:Ever dreamed of eternity.

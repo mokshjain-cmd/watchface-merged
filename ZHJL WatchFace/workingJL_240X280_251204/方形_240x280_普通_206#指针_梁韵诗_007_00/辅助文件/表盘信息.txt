@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:小熊猫
+#表盘描述
+worksDescribe_1:白色指针设计提升视觉层级，时间、步数、心率数据展示可以知道今日步行情况和当前心率状态以及设备剩余电量
+
+#=====英文=====
+
+#表盘名称
+worksName_0:The red panda
+#表盘描述:
+worksDescribe_0:The white pointer design enhances the visual level, and the time, steps, and heart rate data display can know today's walking situation and current heart rate status, as well as the remaining battery power of the device

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="WatchUI.Views.Thumbnail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"      
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <GroupBox Header="缩略图" >
+        <StackPanel>
+            <TextBlock Text="{Binding Error}" FontSize="24" Foreground="Red" />
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 0 0 0">
+                <DockPanel>
+                   
+                    <ListBox ItemsSource="{Binding Thumbnails}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate >
+                                <StackPanel>
+                                    <Image Width="{Binding Width}" Height="{Binding Height}" Source="{Binding BitmapSource}" Cursor="Hand"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <!--<Image Width="{Binding BackgroundItem.Thumbnail.Width}" Height="{Binding BackgroundItem.Thumbnail.Height}" Source="{Binding BackgroundItem.Thumbnail.ImgPath}"/>-->
+                </DockPanel>
+            </material:ColorZone>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 5 0 0">
+                <DockPanel>
+                    <Button
+                      Style="{StaticResource MaterialDesignPaperButton}"
+                      ToolTip="Resource name: MaterialDesignPaperButton"
+                      Content="确定"
+                      DockPanel.Dock="Right" Command="{Binding Confim}" Cursor="Hand" IsDefault="True"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="" />
+                </DockPanel>
+            </material:ColorZone>
+        </StackPanel>
+
+    </GroupBox>
+</UserControl>

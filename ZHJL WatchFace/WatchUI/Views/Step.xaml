@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="WatchUI.Views.Step"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    <GroupBox Header="步数" >
+        <StackPanel>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 0 0 0">
+                <DockPanel>
+                    <Button Content="-" DockPanel.Dock="Right" Command="{Binding SubProgressbarShowIndex}" IsEnabled="{Binding Progressbar.IsEnable}"/>
+                    <Button Content="+" DockPanel.Dock="Right" Command="{Binding AddProgressbarShowIndex}" IsEnabled="{Binding Progressbar.IsEnable}"/>
+                    <Slider Minimum="1" Maximum="{Binding Progressbar.LayerNum}" Value="{Binding Progressbar.ShowIndex}" Width="120" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0 0 0"  IsEnabled="{Binding Progressbar.IsEnable}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="{Binding Progressbar.BarDescr}"  DockPanel.Dock="Right"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="进度" />
+                    <TextBlock VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" IsEnabled="{Binding Progressbar.IsEnable}" Style="{StaticResource textBlock}"/>
+
+                </DockPanel>
+            </material:ColorZone>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 5 0 0">
+                <DockPanel>
+                    <Button Content="-" DockPanel.Dock="Right" Command="{Binding SubNumbarShowIndex}" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <Button Content="+" DockPanel.Dock="Right" Command="{Binding AddNumbarShowIndex}" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <Slider Minimum="1" Maximum="{Binding  Numbar.LayerNum}" Value="{Binding Numbar.ShowIndex}" Width="120" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0 0 0" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="{Binding Numbar.BarDescr}"  DockPanel.Dock="Right"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="数值" />
+                    <TextBlock VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" IsEnabled="{Binding Numbar.IsEnable}" Style="{StaticResource textBlock}"/>
+                </DockPanel>
+            </material:ColorZone>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 5 0 0">
+                <DockPanel IsEnabled="{Binding Numbar.IsEnable}">
+                    <Button Content="5" DockPanel.Dock="Right" Margin="5 0 0 0" Command="{Binding ShowNumCommnad}" CommandParameter="5" />
+                    <Button Content="4" DockPanel.Dock="Right" Margin="5 0 0 0" Command="{Binding ShowNumCommnad}" CommandParameter="4"/>
+                    <Button Content="3" DockPanel.Dock="Right" Margin="5 0 0 0" Command="{Binding ShowNumCommnad}" CommandParameter="3"/>
+                    <Button Content="2" DockPanel.Dock="Right" Margin="5 0 0 0" Command="{Binding ShowNumCommnad}" CommandParameter="2"/>
+                    <Button Content="1" DockPanel.Dock="Right" Margin="5 0 0 0" Command="{Binding ShowNumCommnad}" CommandParameter="1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="模拟" />
+                    <TextBlock VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" IsEnabled="{Binding Numbar.IsEnable}" Style="{StaticResource textBlock}"/>
+
+                </DockPanel>
+            </material:ColorZone>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 5 0 0">
+                <DockPanel IsEnabled="{Binding Numbar.IsEnable}">
+                    <Slider Minimum="0" Maximum="3" Value="{Binding Numbar.Align}" Width="120" DockPanel.Dock="Right" Margin="5 0 0 0"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="{Binding Numbar.AlignTxt}"  DockPanel.Dock="Right"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="对齐方式" />
+                    <TextBlock VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" IsEnabled="{Binding Numbar.IsEnable}" Style="{StaticResource textBlock}"/>
+
+                </DockPanel>
+            </material:ColorZone>
+        </StackPanel>
+
+
+    </GroupBox>
+</UserControl>

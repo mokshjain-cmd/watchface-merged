@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:晚霞
+#表盘描述
+worksDescribe_1:当太阳快沉没的时候，它又射出了更加绚丽的色彩，天空中的色彩快速变幻。时而红，时而淡蓝中夹杂着紫色
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Sunset glow
+#表盘描述:
+worksDescribe_0:When the sun is about to sink, it shoots out more gorgeous colors, and the colors in the sky change rapidly.Sometimes red, sometimes light blue mixed with purple

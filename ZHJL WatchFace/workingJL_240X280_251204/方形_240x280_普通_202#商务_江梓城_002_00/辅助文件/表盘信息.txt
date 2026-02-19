@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:絮絮
+#表盘描述
+worksDescribe_1:烟雾缭绕而清幽
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Catchy
+#表盘描述:
+worksDescribe_0:It's smoky and quiet.

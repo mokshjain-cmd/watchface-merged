@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:色彩块
+#表盘描述
+worksDescribe_1:不同色彩块构成的艺术
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Color block
+#表盘描述:
+worksDescribe_0:Art composed of different blocks of color

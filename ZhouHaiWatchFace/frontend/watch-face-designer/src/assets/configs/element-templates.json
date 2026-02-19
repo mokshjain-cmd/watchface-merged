@@ -1,0 +1,315 @@
+{
+  "elementTemplates": [
+    {
+      "id": "digital_time",
+      "name": "Digital Time",
+      "type": "DragNums",
+      "category": "time",
+      "icon": "clock",
+      "description": "Digital time display with customizable format",
+      "defaultProperties": {
+        "format": "HH:mm",
+        "alignment": "center",
+        "fontFamily": "Arial",
+        "fontSize": 24,
+        "color": "#FFFFFF",
+        "width": 100,
+        "height": 40
+      },
+      "bindings": [
+        {
+          "type": "time",
+          "source": "current_time",
+          "format": "HH:mm"
+        }
+      ]
+    },
+    {
+      "id": "analog_hour_hand",
+      "name": "Hour Hand",
+      "type": "DragPoint",
+      "category": "time",
+      "icon": "clock",
+      "description": "Analog clock hour hand",
+      "defaultProperties": {
+        "pointType": "line",
+        "radius": 80,
+        "strokeColor": "#FFFFFF",
+        "width": 4,
+        "height": 80
+      },
+      "bindings": [
+        {
+          "type": "time",
+          "source": "hour_angle",
+          "format": "degrees"
+        }
+      ]
+    },
+    {
+      "id": "date_display",
+      "name": "Date Display",
+      "type": "DragNums",
+      "category": "date",
+      "icon": "calendar",
+      "description": "Date display with various formats",
+      "defaultProperties": {
+        "format": "MMM dd",
+        "alignment": "center",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "color": "#CCCCCC",
+        "width": 80,
+        "height": 24
+      },
+      "bindings": [
+        {
+          "type": "date",
+          "source": "current_date",
+          "format": "MMM dd"
+        }
+      ]
+    },
+    {
+      "id": "battery_bar",
+      "name": "Battery Bar",
+      "type": "DragProgress",
+      "category": "status",
+      "icon": "battery",
+      "description": "Linear battery level indicator",
+      "defaultProperties": {
+        "progressType": "linear",
+        "minValue": 0,
+        "maxValue": 100,
+        "backgroundColor": "#333333",
+        "foregroundColor": "#00FF00",
+        "width": 100,
+        "height": 8
+      },
+      "bindings": [
+        {
+          "type": "battery",
+          "source": "battery_level",
+          "format": "percentage"
+        }
+      ]
+    },
+    {
+      "id": "battery_circle",
+      "name": "Battery Circle",
+      "type": "DragProgress",
+      "category": "status",
+      "icon": "battery",
+      "description": "Circular battery level indicator",
+      "defaultProperties": {
+        "progressType": "circular",
+        "minValue": 0,
+        "maxValue": 100,
+        "backgroundColor": "#333333",
+        "foregroundColor": "#00FF00",
+        "width": 60,
+        "height": 60
+      },
+      "bindings": [
+        {
+          "type": "battery",
+          "source": "battery_level",
+          "format": "percentage"
+        }
+      ]
+    },
+    {
+      "id": "step_counter",
+      "name": "Step Counter",
+      "type": "DragNums",
+      "category": "fitness",
+      "icon": "footprints",
+      "description": "Daily step count display",
+      "defaultProperties": {
+        "format": "0",
+        "alignment": "center",
+        "fontFamily": "Arial",
+        "fontSize": 20,
+        "color": "#FFFFFF",
+        "width": 80,
+        "height": 30
+      },
+      "bindings": [
+        {
+          "type": "steps",
+          "source": "daily_steps",
+          "format": "number"
+        }
+      ]
+    },
+    {
+      "id": "weather_icon",
+      "name": "Weather Icon",
+      "type": "DragImage",
+      "category": "weather",
+      "icon": "cloud-sun",
+      "description": "Weather condition icon",
+      "defaultProperties": {
+        "source": "",
+        "opacity": 1,
+        "width": 48,
+        "height": 48
+      },
+      "bindings": [
+        {
+          "type": "weather",
+          "source": "weather_icon",
+          "format": "image"
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "name": "Temperature",
+      "type": "DragNums",
+      "category": "weather",
+      "icon": "thermometer",
+      "description": "Current temperature display",
+      "defaultProperties": {
+        "format": "0°",
+        "alignment": "center",
+        "fontFamily": "Arial",
+        "fontSize": 18,
+        "color": "#FFFFFF",
+        "width": 60,
+        "height": 24
+      },
+      "bindings": [
+        {
+          "type": "weather",
+          "source": "temperature",
+          "format": "temperature"
+        }
+      ]
+    },
+    {
+      "id": "am_pm_indicator",
+      "name": "AM/PM Indicator",
+      "type": "DragAMPM",
+      "category": "time",
+      "icon": "clock",
+      "description": "AM/PM time indicator",
+      "defaultProperties": {
+        "amText": "AM",
+        "pmText": "PM",
+        "format": "12h",
+        "fontFamily": "Arial",
+        "fontSize": 12,
+        "color": "#CCCCCC",
+        "width": 30,
+        "height": 16
+      },
+      "bindings": [
+        {
+          "type": "time",
+          "source": "am_pm",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "day_of_week",
+      "name": "Day of Week",
+      "type": "DragWeek",
+      "category": "date",
+      "icon": "calendar",
+      "description": "Day of the week display",
+      "defaultProperties": {
+        "weekFormat": "short",
+        "language": "en",
+        "fontFamily": "Arial",
+        "fontSize": 14,
+        "color": "#CCCCCC",
+        "width": 40,
+        "height": 20
+      },
+      "bindings": [
+        {
+          "type": "date",
+          "source": "day_of_week",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "notification_indicator",
+      "name": "Notification Indicator",
+      "type": "DragSwitch",
+      "category": "status",
+      "icon": "bell",
+      "description": "Shows when notifications are present",
+      "defaultProperties": {
+        "isOn": false,
+        "onImage": "",
+        "offImage": "",
+        "width": 24,
+        "height": 24
+      },
+      "bindings": [
+        {
+          "type": "notifications",
+          "source": "has_notifications",
+          "format": "boolean"
+        }
+      ]
+    },
+    {
+      "id": "background_image",
+      "name": "Background",
+      "type": "DragImage",
+      "category": "background",
+      "icon": "image",
+      "description": "Watch face background image",
+      "defaultProperties": {
+        "source": "",
+        "opacity": 1,
+        "width": 390,
+        "height": 450
+      },
+      "bindings": []
+    }
+  ],
+  "categories": [
+    {
+      "id": "time",
+      "name": "Time",
+      "icon": "clock",
+      "description": "Time display elements"
+    },
+    {
+      "id": "date",
+      "name": "Date",
+      "icon": "calendar",
+      "description": "Date and calendar elements"
+    },
+    {
+      "id": "status",
+      "name": "Status",
+      "icon": "info",
+      "description": "Device status indicators"
+    },
+    {
+      "id": "fitness",
+      "name": "Fitness",
+      "icon": "activity",
+      "description": "Health and fitness tracking elements"
+    },
+    {
+      "id": "weather",
+      "name": "Weather",
+      "icon": "cloud",
+      "description": "Weather and environment elements"
+    },
+    {
+      "id": "background",
+      "name": "Background",
+      "icon": "image",
+      "description": "Background and decorative elements"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:霓光灯
+#表盘描述
+worksDescribe_1:每当夜幕降临时，华灯初上，五颜六色的霓虹灯就显得格外美丽
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Neon light
+#表盘描述:
+worksDescribe_0:When night falls, the colorful neon lights are particularly beautiful

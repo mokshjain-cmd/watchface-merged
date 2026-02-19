@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:树状图表
+#表盘描述
+worksDescribe_1:层级分明，节约浏览时间，商务佳选
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Tree diagram
+#表盘描述:
+worksDescribe_0:The level is clear, saving browsing time, the best choice for business

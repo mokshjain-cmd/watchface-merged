@@ -1,0 +1,377 @@
+.property-panel {
+  display: flex;
+  flex-direction: column;
+  background: #2a2a2a;
+  border-left: 1px solid #333;
+  width: 320px;
+  height: 100vh;
+  overflow-y: auto;
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: #333;
+    border-bottom: 1px solid #444;
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .selection-count,
+    .element-type {
+      font-size: 12px;
+      color: #999;
+      background: #444;
+      padding: 4px 8px;
+      border-radius: 12px;
+      text-transform: capitalize;
+    }
+  }
+
+  .panel-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .no-selection,
+  .multiple-selection-info {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+
+    p {
+      margin: 0 0 8px;
+      
+      &.hint {
+        font-size: 12px;
+        color: #666;
+      }
+    }
+  }
+
+  .property-section {
+    background: #333;
+    border-radius: 8px;
+    padding: 16px;
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #444;
+    }
+
+    .property-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .property-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &.checkbox-row {
+          padding: 4px 0;
+        }
+
+        label {
+          font-size: 12px;
+          color: #ccc;
+          min-width: 80px;
+          font-weight: 500;
+
+          &:has(input[type="checkbox"]) {
+            min-width: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+          }
+        }
+
+        input, select, textarea {
+          flex: 1;
+          background: #2a2a2a;
+          border: 1px solid #555;
+          border-radius: 4px;
+          color: #fff;
+          font-size: 12px;
+          transition: border-color 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+          }
+
+          &:hover {
+            border-color: #666;
+          }
+        }
+
+        input[type="number"] {
+          padding: 6px 8px;
+          max-width: 80px;
+        }
+
+        input[type="text"] {
+          padding: 6px 8px;
+        }
+
+        input[type="color"] {
+          width: 40px;
+          height: 32px;
+          padding: 2px;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &::-webkit-color-swatch-wrapper {
+            padding: 0;
+          }
+
+          &::-webkit-color-swatch {
+            border: none;
+            border-radius: 2px;
+          }
+        }
+
+        input[type="range"] {
+          flex: 1;
+          height: 4px;
+          background: #555;
+          border-radius: 2px;
+          outline: none;
+          cursor: pointer;
+
+          &::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+
+          &::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+        }
+
+        input[type="checkbox"] {
+          width: 16px;
+          height: 16px;
+          accent-color: #4a90e2;
+          cursor: pointer;
+        }
+
+        select {
+          padding: 6px 8px;
+          cursor: pointer;
+
+          option {
+            background: #2a2a2a;
+            color: #fff;
+          }
+        }
+
+        textarea {
+          padding: 6px 8px;
+          resize: vertical;
+          min-height: 60px;
+          font-family: inherit;
+        }
+
+        .value-display {
+          font-size: 11px;
+          color: #999;
+          min-width: 35px;
+          text-align: right;
+        }
+      }
+    }
+
+    .file-upload-btn,
+    .layer-btn {
+      width: 100%;
+      padding: 8px 12px;
+      background: #4a90e2;
+      border: 1px solid #4a90e2;
+      border-radius: 4px;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #357abd;
+        border-color: #357abd;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 4px rgba(74, 144, 226, 0.3);
+      }
+    }
+
+    .layer-btn {
+      background: #555;
+      border-color: #555;
+
+      &:hover {
+        background: #666;
+        border-color: #666;
+      }
+    }
+  }
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+}
+
+// Responsive design
+@media (max-width: 1200px) {
+  .property-panel {
+    width: 280px;
+
+    .panel-content {
+      padding: 12px;
+      gap: 16px;
+    }
+
+    .property-section {
+      padding: 12px;
+
+      .section-title {
+        font-size: 13px;
+      }
+
+      .property-grid .property-row {
+        gap: 6px;
+
+        label {
+          min-width: 70px;
+          font-size: 11px;
+        }
+
+        input[type="number"] {
+          max-width: 70px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .property-panel {
+    width: 100%;
+    height: 40vh;
+    border-left: none;
+    border-top: 1px solid #333;
+
+    .property-grid .property-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+
+      label {
+        min-width: auto;
+      }
+
+      input[type="number"] {
+        max-width: none;
+      }
+    }
+  }
+}
+
+// Animation for smooth property changes
+.property-panel .property-section {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Special styling for property types
+.property-panel {
+  .property-section {
+    &[data-type="transform"] .section-title {
+      color: #4a90e2;
+    }
+
+    &[data-type="style"] .section-title {
+      color: #7ed321;
+    }
+
+    &[data-type="text"] .section-title {
+      color: #9013fe;
+    }
+
+    &[data-type="image"] .section-title {
+      color: #bd10e0;
+    }
+
+    &[data-type="layer"] .section-title {
+      color: #f5a623;
+    }
+  }
+}
+
+// Error states
+.property-panel input:invalid {
+  border-color: #ff4757;
+  box-shadow: 0 0 0 2px rgba(255, 71, 87, 0.1);
+}
+
+// Focus states
+.property-panel input:focus-visible,
+.property-panel select:focus-visible,
+.property-panel textarea:focus-visible {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}

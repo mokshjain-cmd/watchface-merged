@@ -1,0 +1,103 @@
+{
+  "WatchName": "Sample Watch Face",
+  "Width": 390,
+  "Height": 450,
+  "ThumbnailWidth": 200,
+  "ThumbnailHeight": 230,
+  "Corner": 0,
+  "IsAlbum": false,
+  "FolderName": "sample_watch",
+  "WatchStyles": [
+    {
+      "StyleName": "default",
+      "DragBindBases": [
+        {
+          "ItemName": "Background",
+          "ElementType": "DragBindImage",
+          "X": 0,
+          "Y": 0,
+          "Width": 390,
+          "Height": 450,
+          "ImagePath": "assets/background.png",
+          "ImageData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        },
+        {
+          "ItemName": "Hour",
+          "ElementType": "DragBindNormalDateTime",
+          "X": 100,
+          "Y": 150,
+          "Width": 80,
+          "Height": 120,
+          "ImagePath": "assets/digits/",
+          "ImageData": "0.png,1.png,2.png,3.png,4.png,5.png,6.png,7.png,8.png,9.png",
+          "ImageAlignment": 0,
+          "DigitSpacing": 2,
+          "DigitCount": 2,
+          "IsDot": false,
+          "DotAlign": 0
+        },
+        {
+          "ItemName": "Minute",
+          "ElementType": "DragBindNormalDateTime",
+          "X": 200,
+          "Y": 150,
+          "Width": 80,
+          "Height": 120,
+          "ImagePath": "assets/digits/",
+          "ImageData": "0.png,1.png,2.png,3.png,4.png,5.png,6.png,7.png,8.png,9.png",
+          "ImageAlignment": 0,
+          "DigitSpacing": 2,
+          "DigitCount": 2,
+          "IsDot": false,
+          "DotAlign": 0
+        },
+        {
+          "ItemName": "Steps",
+          "ElementType": "DragBindNums",
+          "X": 150,
+          "Y": 300,
+          "Width": 100,
+          "Height": 50,
+          "ImagePath": "assets/digits/",
+          "ImageData": "0.png,1.png,2.png,3.png,4.png,5.png,6.png,7.png,8.png,9.png",
+          "ImageAlignment": 0,
+          "DigitSpacing": 2,
+          "DigitCount": 5,
+          "IsDot": false,
+          "DotAlign": 0
+        },
+        {
+          "ItemName": "Battery",
+          "ElementType": "DragBindNums",
+          "X": 50,
+          "Y": 50,
+          "Width": 60,
+          "Height": 40,
+          "ImagePath": "assets/digits/",
+          "ImageData": "0.png,1.png,2.png,3.png,4.png,5.png,6.png,7.png,8.png,9.png",
+          "ImageAlignment": 0,
+          "DigitSpacing": 2,
+          "DigitCount": 3,
+          "IsDot": false,
+          "DotAlign": 0
+        }
+      ],
+      "TemplateBinds": [],
+      "ScreenType": 0,
+      "Zh": {
+        "Width": 390,
+        "Height": 450,
+        "Item": {
+          "KwhNum": 0,
+          "StepNum": 12345,
+          "HeartRateNum": 72,
+          "CalorieNum": 300,
+          "CurrentDateTime": "2024-01-15T10:30:00Z",
+          "StrengthNum": 85,
+          "IsOpen": false
+        },
+        "DragBindBases": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+ZhouHai Project:
+
+1. Convert ZhouHai Watchface tool from windows to web-based tool.
+2. We now have a frontend, on clicking the 'generate bin' button, a watchFace.json file of a very particular pattern is generated. This json file
+is sent to the backend for bin generation. At the backend we have a ZhouHai bin generator, which essentially converts our json file into a bin file.
+
+
+Main Project:
+
+Like ZhouHai, we have many vendors.
+
+Not all vendors use a json file to generate bin file, some use json, some use folders to divide components.
+Therefore, The backend bin file generator of each type expects different things. The ZhouHai project bin generator expects the json file, 
+The the JieLi bin generator expects folder in the exact pattern (as in the example).
+
+But we cannot sit and make frontend for each vendor, so we use the json file as a bridge.
+We have already built a frontend that generates the watchFace.json json file, for JieLi, we will basically make a middleware that converts
+this json file into the exact pattern of folders required by the Jieli bin generator. The bin generator will use these folders to generate
+the bin file which the user can download on the frontend and push to the watch.
+
+Your current task is: Make a middleware to convert the json file into folders for Jieli, send those folders to the JieLi backend bin generator
+and get the bin file.

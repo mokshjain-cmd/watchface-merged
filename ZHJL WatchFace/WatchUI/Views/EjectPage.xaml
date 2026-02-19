@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="WatchUI.Views.EjectPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="catalogue" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="5 "/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment }"/>
+                            <Border Width="30" Height="30" CornerRadius="15" Background="Transparent"  x:Name="border"  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <TextBlock Text="✔" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="Green"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="border" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter  TargetName="border" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <!--<StackPanel Orientation="Horizontal">
+            <TextBox Width="150" Margin="10,0,0,10" x:Name="Search"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalContentAlignment="Center"   />
+            <Button Margin="20 0 0 0" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=Search,Path=Text}" Cursor="Hand">搜索</Button>
+        </StackPanel>-->
+        <GroupBox Grid.Row="1"  Header="普通表盘-文件选择">
+            <ListBox Name="catList" ItemsSource="{Binding Catalogues}" ItemContainerStyle="{StaticResource catalogue}" SelectionMode="Multiple" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!--<Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Title}"/>
+                            <Image Grid.Row="1" Source="{Binding ImaPath}" Width="50" HorizontalAlignment="Left"/>
+                        </Grid>-->
+                        <StackPanel>
+                            <TextBlock>
+                                <Run Text="{Binding Title}"/>
+                                 <Run Text="{Binding Lang}"/>
+                            </TextBlock>
+                            <Grid Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="1" Source="{Binding BitmapSource}" Width="50" HorizontalAlignment="Left"/>
+                                <!--<Button Grid.Column="1" Content="取消上传" Command="{Binding DataContext.CancelUpLoadCommand, RelativeSource={RelativeSource  AncestorType=Window}}" CommandParameter="{Binding WatchId}"/>-->
+                            </Grid>
+                            <TextBlock>
+                                <Run Text="上传状态"/>
+                                <Run Text="{Binding IsUpload}"/>
+                            </TextBlock>
+                                
+                               
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Margin="20 0 0 0" Command="{Binding Confim}"  CommandParameter="{Binding ElementName=catList,Path=SelectedItems}" Cursor="Hand"  IsDefault="True">确定</Button>
+            <Button Margin="20 0 0 0" Command="{Binding Canccel}" Cursor="Hand">取消</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

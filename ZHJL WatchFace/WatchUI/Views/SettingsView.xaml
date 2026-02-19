@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="WatchUI.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             mc:Ignorable="d" 
+             xmlns:prism="http://prismlibrary.com/"
+             d:DesignHeight="450" d:DesignWidth="1200" Height="400">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="Width" Value="950"/>
+            <Setter Property="Height" Value="350"/>
+            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <!--<UserControl.Resources>
+        <Style x:Key="liststyle" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+    </UserControl.Resources>-->
+    <GroupBox Background="White" Header="请选择项目">
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="6"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="增加项目" Width="100" HorizontalAlignment="Right" Margin="5" Command="{Binding AddProjectCommnad}" Cursor="Hand"/>
+                <Button Content="修改项目" Width="100" HorizontalAlignment="Right" Margin="5" Command="{Binding AlterProjectCommnad}" Cursor="Hand"/>
+            </StackPanel>
+            <ListView ItemsSource="{Binding Settings}"  SelectedItem="{Binding Setting,UpdateSourceTrigger=PropertyChanged}" Height="250">
+
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn DisplayMemberBinding="{Binding ProjectName}" Header="项目名称:" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Width}" Header="宽:" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Height}" Header="高:" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ThumbnailWidth}" Header="缩略图宽:" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ThumbnailHeight}" Header="缩略图高:" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ThumbnailX}" Header="缩略图X:" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ThumbnailY}" Header="缩略图Y:" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding MaxValue}" Header="最大值(KB):" Width="150"/>
+                        <GridViewColumn  Header="操作" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="删除"  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Window }}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=GridViewRowPresenter},Path=Content}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="确定" Width="100" HorizontalAlignment="Right" Margin="5" Command="{Binding SelectCommand}" Cursor="Hand"/>
+                <Button Content="取消" Width="100" HorizontalAlignment="Right" Margin="5" Command="{Binding CloseCommand}"/>
+            </StackPanel>
+        </StackPanel>
+
+    </GroupBox>
+</UserControl>

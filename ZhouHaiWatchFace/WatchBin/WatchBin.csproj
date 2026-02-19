@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>false</UseWindowsForms>
+    <AssemblyTitle>Noise Watch Binary Tools</AssemblyTitle>
+    <Product>Noise Watch Face Tool</Product>
+    <Company>Noise</Company>
+    <Copyright>Copyright © Noise 2025</Copyright>
+    <AssemblyDescription>Watch Binary Processing Tools by Noise</AssemblyDescription>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WatchControlLibrary\WatchControlLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

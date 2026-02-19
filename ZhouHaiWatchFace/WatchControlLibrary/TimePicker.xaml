@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="WatchControlLibrary.TimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchControlLibrary"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:StringDateToDoubleConverter x:Key="toDoubleConverter"/>
+        <local:StringDateConverter x:Key="StringDateConverter"/>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel Orientation="Vertical" Background="#202020" TextBlock.FontSize="20" TextBlock.Foreground="#aaa">
+        <Border Background="#2C2C2C" CornerRadius="30" Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid   Margin="0 0 0 10">
+                    <TextBlock Text="Time"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Right" Margin="10 0" Background="Transparent" BorderThickness="0"/>
+                    <!--<TextBox Text="{Binding TimeText, RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0"/>-->
+                </Grid>
+                <Slider Maximum="86399" Minimum="0" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                        SmallChange="30" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"
+                        />
+                <UniformGrid Columns="9" Margin="0 5 0 0" Name="TimeIndex">
+                    <UniformGrid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Padding" Value="5"/>
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </UniformGrid.Resources>
+                    <TextBlock Text="Early Morning" Tag="0"/>
+                    <TextBlock Text="Dawn" Tag="1"/>
+                    <TextBlock Text="Dawn" Tag="2"/>
+                    <TextBlock Text="Morning" Tag="3"/>
+                    <TextBlock Text="Noon" Tag="4"/>
+                    <TextBlock Text="Afternoon" Tag="5"/>
+                    <TextBlock Text="Evening" Tag="6"/>
+                    <TextBlock Text="Dusk" Tag="7"/>
+                    <TextBlock Text="Night" Tag="8"/>
+                </UniformGrid>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Year"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=year, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Right" Background="Transparent" BorderThickness="0"/>
+                </Grid>
+                <Slider Maximum="9999" Minimum="1" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=year}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+                <Grid  Margin="0 10 0 0">
+                    <TextBlock Text="Lunar Calendar"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=chineseYear}"
+                        HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Month"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=month, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Right" BorderThickness="0" Background="Transparent"/>
+                </Grid>
+                <Slider Maximum="12" Minimum="1" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=month}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+                <Grid  Margin="0 10 0 0">
+                    <TextBlock Text="Lunar Calendar"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=chineseMonth, UpdateSourceTrigger=PropertyChanged}"
+          HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Day"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl},  Converter={StaticResource StringDateConverter}, ConverterParameter=day, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Right" BorderThickness="0" Background="Transparent"/>
+                </Grid>
+                <Slider Maximum="31" Minimum="1" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=day}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+                <Grid   Margin="0 10 0 0">
+                    <TextBlock Text="Lunar Calendar"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=chineseDay, UpdateSourceTrigger=PropertyChanged}"
+          HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" IsReadOnly="True"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Hour"/>
+                    <TextBox  Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl},  Converter={StaticResource StringDateConverter}, ConverterParameter=hour, UpdateSourceTrigger=PropertyChanged}" 
+                              HorizontalAlignment="Right" Background="Transparent" BorderThickness="0"/>
+                </Grid>
+                <Slider Maximum="23" Minimum="0" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=hour}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Minute"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl},  Converter={StaticResource StringDateConverter}, ConverterParameter=minute, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Right" Background="Transparent" BorderThickness="0"/>
+                </Grid>
+                <Slider Maximum="59" Minimum="0" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=minute}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+            </StackPanel>
+        </Border>
+        <Border Background="#2C2C2C" CornerRadius="30"  Margin="10 10 10 0">
+            <StackPanel Orientation="Vertical" Margin="20 15">
+                <Grid  Margin="0 0 0 10">
+                    <TextBlock Text="Second"/>
+                    <TextBox Text="{Binding DateTime, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringDateConverter}, ConverterParameter=second, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Right" Background="Transparent" BorderThickness="0"/>
+                </Grid>
+                <Slider Maximum="59" Minimum="0" Value="{Binding DateTime, Converter={StaticResource toDoubleConverter}, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, ConverterParameter=second}" 
+                        SmallChange="1" Foreground="#2587ef" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="{Binding Value, RelativeSource={RelativeSource Mode=self}}"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+    </ScrollViewer>
+</UserControl>

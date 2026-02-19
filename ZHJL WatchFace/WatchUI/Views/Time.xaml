@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="WatchUI.Views.Time"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchUI.Views"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox Header="时间" >
+        <StackPanel>
+            <material:ColorZone Mode="PrimaryLight" Padding="8" Margin="0 5 0 0">
+                <DockPanel>
+                    <Button Content="-" DockPanel.Dock="Right" Command="{Binding SubNumbarShowIndex}" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <Button Content="+" DockPanel.Dock="Right" Command="{Binding AddNumbarShowIndex}" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <Slider Minimum="1" Maximum="{Binding Numbar.LayerNum}" Value="{Binding Numbar.ShowIndex}" Width="120" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0 0 0" IsEnabled="{Binding Numbar.IsEnable}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="{Binding Numbar.BarDescr}"  DockPanel.Dock="Right"/>
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="时间" />
+                    <TextBlock VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" IsEnabled="{Binding Numbar.IsEnable}" Style="{StaticResource textBlock}"/>
+                </DockPanel>
+            </material:ColorZone>
+            
+        </StackPanel>
+    </GroupBox>
+</UserControl>

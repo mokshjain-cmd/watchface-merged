@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:星阵
+#表盘描述
+worksDescribe_1:时间的通道
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Star array
+#表盘描述:
+worksDescribe_0:Passage of time

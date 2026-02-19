@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:简洁灵感
+#表盘描述
+worksDescribe_1:灵感是利用条纹颜色深浅与不同大小延伸，追求极致的简洁。
+
+#=====英文=====
+
+#表盘名称
+worksName_0:Concise and inspiration
+#表盘描述:
+worksDescribe_0:Inspiration is the use of stripe color shades and different size extension, the pursuit of ultimate simplicity.

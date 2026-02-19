@@ -1,0 +1,15 @@
+#说明：以下结构不能修改，只填写对应XX部分。
+
+#=====中文=====
+
+#表盘名称
+worksName_1:一个人
+#表盘描述
+worksDescribe_1:喜欢下雨，喜欢淋雨，喜欢雨滴落下的声音，喜欢一个人。
+
+#=====英文=====
+
+#表盘名称
+worksName_0:game player
+#表盘描述:
+worksDescribe_0:Like rain, like getting caught in the rain, like the sound of raindrops falling, like being alone.

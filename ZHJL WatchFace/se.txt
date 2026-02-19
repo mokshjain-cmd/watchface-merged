@@ -1,0 +1,44 @@
+Root Cause: Incorrect Folder Code Calculation in Multi-Digit Component Splitting
+The primary issue was in the splitMultiDigitComponent method in componentMapper.ts. This method handles components with multiple digits (like Steps with 5 digits, Heart Rate with 3, Calories with 4) by creating separate folders for each digit position. However, the logic for calculating the JieLi folder codes (e.g., 07XX for Steps, 08XX for Heart Rate, 09XX for Calories) was flawed for health components, leading to images being placed in wrong folders.
+
+Key Differences Between Time/Date and Health Components
+Time/Date Components (e.g., Hour, Minute): These start from the tens place and increment upwards. For example, Hour uses codes 0601 (tens) and 0602 (ones).
+Health Components (e.g., Steps, Heart Rate, Calories): These start from the ones place and calculate backwards to higher digits. For example:
+Steps: Should use 0705 (ten thousands), 0706 (thousands), 0707 (hundreds), 0708 (tens), 0709 (ones).
+Heart Rate: 0804 (hundreds), 0805 (tens), 0806 (ones).
+Calories: 0905 (thousands), 0906 (hundreds), 0907 (tens), 0908 (ones).
+The code initially treated health components like time components (incrementing from the base code), but health components needed backwards calculation.
+
+Specific Problems and Examples
+Steps Component:
+
+Base code: JieLiComponentCode.STEPS_DIGIT_1 = '0709' (ones place).
+Digit count: 5 (forced in code for Steps up to 99999).
+Before Fix: The loop was incrementing from 0709: 0709, 0710, 0711, 0712, 0713.
+0710 is "普通" (normal/generic), not a digit folder.
+Images ended up in invalid or unintended folders (e.g., 0710+), not the correct 0705-0709 range.
+After Fix: Calculates backwards: startDigit = 9 - (5-1) = 5, so codes 0705, 0706, 0707, 0708, 0709.
+Result: Images now correctly go to 07XX folders.
+Heart Rate Component:
+
+Base code: '0806' (ones place).
+Digit count: 3 (forced for 0-999).
+Before Fix: Incrementing from 0806: 0806, 0807, 0808+.
+0807 is "普通", not a digit.
+Images went to wrong folders like 0807 or higher, not 0804-0806.
+After Fix: startDigit = 6 - (3-1) = 4, so 0804, 0805, 0806.
+Result: Images now in 08XX folders.
+Calories Component:
+
+Base code: '0908' (ones place).
+Digit count: 4 (forced for 0-9999).
+Before Fix: Incrementing from 0908: 0908, 0909, 0910+.
+0909 is "普通", not a digit.
+Images in incorrect folders like 0909 or higher, not 0905-0908.
+After Fix: startDigit = 8 - (4-1) = 5, so 0905, 0906, 0907, 0908.
+Result: Images now in 09XX folders.
+Why This Led to Missing Images in Temp Folders
+The "temp folder" refers to the intermediate JieLi folder structure created during conversion (e.g., under output/watchface-name/timestamp/).
+With wrong codes, images were saved to non-existent or incorrect subfolders (e.g., 0710 instead of 0709), so they didn't appear in the expected 07XX/08XX/09XX folders.
+The converter's logging (added during debugging) confirmed this: it showed components being processed but images not landing in the right places.
+Bin generation still worked (after fixing the nested path issue), but the folder structure was malformed, leading to incomplete watchfaces.

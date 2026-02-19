@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>false</UseWindowsForms>
+    <UseWPF>false</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WatchBasic\WatchBasic.csproj" />
+    <ProjectReference Include="..\WatchUI\WatchUI.csproj" />
+    <ProjectReference Include="..\WatchDB\WatchDB.csproj" />
+    <ProjectReference Include="..\WatchDB_DIY\WatchDB_DIY.csproj" />
+    <ProjectReference Include="..\WatchJieLi\WatchJieLi.csproj" />
+  </ItemGroup>
+</Project>

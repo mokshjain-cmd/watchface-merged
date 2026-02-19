@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>false</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>false</UseWindowsForms>
+    <AssemblyTitle>Noise Watch Control Library</AssemblyTitle>
+    <Product>Noise Watch Face Tool</Product>
+    <Company>Noise</Company>
+    <Copyright>Copyright © Noise 2025</Copyright>
+    <AssemblyDescription>Watch Face Control Library by Noise</AssemblyDescription>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\DragBindBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
+    <PackageReference Include="MiniExcel" Version="1.34.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+</Project>

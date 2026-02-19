@@ -1,0 +1,286 @@
+﻿<Window x:Class="WatchJieLi.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WatchJieLi.Views"
+        xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:diymdl="clr-namespace:WatchBasic.UIBasic;assembly=WatchBasic"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="MainView" Height="700" Width="1000">
+    <Window.Resources>
+        <DataTemplate x:Key="ShowStyle" DataType="{x:Type diymdl:Layer}">
+            <Canvas  >
+                <Image Canvas.Left="{Binding RatioLeft}" Canvas.Top="{Binding RatioTop}" Source="{Binding BitmapSource}" Width="{Binding RatioWidth}">
+                    <Image.RenderTransform>
+                        <RotateTransform  Angle="{Binding Angle}" CenterX="{Binding CenterX}" CenterY="{Binding CenterY}"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Canvas>
+        </DataTemplate>
+    </Window.Resources>
+    <material:DialogHost Name="dialogHost">
+        <material:DrawerHost x:Name="drawHost">
+            <DockPanel>
+                <!--material:ShadowAssist.ShadowDepth="Depth2"-->
+                <material:ColorZone
+                    Padding="16" x:Name="ColorZone"
+                    material:ElevationAssist.Elevation="Dp2"
+                    Mode="PrimaryMid"
+                    DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="False">
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="22"
+                            Margin="16,0"
+                            AutomationProperties.Name="Material Design In XAML Toolkit"
+                            Text="WatchFace"/>
+                            <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="22"
+                            Margin="16,0"
+                            AutomationProperties.Name="Material Design In XAML Toolkit"
+                            Text="{Binding WatchCode}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button x:Name="btnMin" Content="—" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                            <Button x:Name="btnMax" Content="☐" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                            <Button x:Name="btnClose" Content="✕" Style="{StaticResource MaterialDesignFlatMidBgButton}" Cursor="Hand" />
+                        </StackPanel>
+                    </DockPanel>
+                </material:ColorZone>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="10" Grid.Row="0" Height="{Binding BackgroundItem.DesignSketch.RatioHeight}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Canvas Grid.Column="0" Background="Gray">
+                                <Image Width="{Binding BackgroundItem.DesignSketch.RatioWidth}"  Source="{Binding BackgroundItem.DesignSketch.BitmapSource}"/>
+                            </Canvas>
+                            <Canvas Grid.Column="1" Background="Gray">
+                                <Image Width="{Binding BackgroundItem.BgImage.RatioWidth}"  Source="{Binding BackgroundItem.BgImage.BitmapSource}"/>
+                                <ItemsControl ItemsSource="{Binding  TypeItems}" >
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <ItemsControl ItemsSource="{Binding Layers}" ItemTemplate="{StaticResource ShowStyle}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl ItemsSource="{Binding  Pointer.Layers}" ItemTemplate="{StaticResource ShowStyle}"></ItemsControl>
+                            </Canvas>
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+                                <TextBox material:HintAssist.Hint="缩放倍数0.2～2" Text="{Binding Ratio}" VerticalAlignment="Center" />
+                                <Button Margin="5 0 0 0" Content="缩放" Command="{Binding SetRatio}"/>
+                            </StackPanel>
+                        </Grid>
+                        <material:ColorZone Grid.Row="1" Mode="PrimaryMid" Padding="8">
+                            <DockPanel>
+                                <TextBlock VerticalAlignment="Center" Margin="0 0 0 0"  Text="语言" />
+                                <ComboBox Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom" ItemsSource="{Binding WatchDescs}" DisplayMemberPath="Language"  SelectedValuePath="Language" SelectedItem="{Binding SelectDesc}" />
+                            </DockPanel>
+                        </material:ColorZone>
+                        <ScrollViewer Grid.Row="2">
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="75*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <GroupBox Grid.Row="1"  Header="指针">
+                                        <StackPanel Orientation="Vertical" >
+                                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                                <TextBlock Text="时" VerticalAlignment="Center"/>
+                                                <Slider Minimum="0" Maximum="360" Value="{Binding Pointer.HourAngle}" IsEnabled="{Binding Pointer.HourEnable}" Width="360" Margin="10 0 10 5"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                                <TextBlock Text="分" VerticalAlignment="Center"/>
+                                                <Slider Minimum="0" Maximum="360" Value="{Binding Pointer.MinAngle}" Width="360"  IsEnabled="{Binding Pointer.MinEnable}"  Margin="10 5"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                                <TextBlock Text="秒" VerticalAlignment="Center"/>
+                                                <Slider Minimum="0" Maximum="360" Value="{Binding Pointer.SecondAngle}" Width="360"   IsEnabled="{Binding Pointer.SecondEnable}" Margin="10 5 10 0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </Grid>
+                                <StackPanel Grid.Row="3">
+                                    <ContentControl prism:RegionManager.RegionName="ColorStyleContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="CalorieContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="GeneralDateContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="HeartRateContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="StepContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="KwhContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="TimeContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="PressureContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="AQIContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="ScreenExtinctionTimeContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="ScreenExtinctionDateContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="ScreenExtinctionStepContent"/>
+                                    <ContentControl prism:RegionManager.RegionName="ScreenExtinctionPointContent"/>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Grid Grid.Column="1" Background="AliceBlue">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1"   Orientation="Horizontal">
+                            <TextBox  Width="320" Text="{Binding BasePath}" IsReadOnly="True"/>
+                            <Button   Content="文件夹设置"  Command="{Binding SettingPathCommand}" Cursor="Hand"/>
+                            <Button   Content="刷新"  Command="{Binding RrefreshPathCommand}"  Cursor="Hand"/>
+                        </StackPanel>
+                        <Grid Grid.Row="2" Cursor="Hand">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="目录"  Cursor="Hand"  Command="{Binding OpenCatalogueCommand}" />
+                                    <TextBox  Width="150" Text="{Binding BatchPath}" IsReadOnly="True"/>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="导出路径"  Cursor="Hand"  Command="{Binding ChooseBatchPathCommand}"/>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="生成bin"  Cursor="Hand"  Command="{Binding GenerateBinCommand}"/>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="批量导出"  Cursor="Hand"  Command="{Binding GenrateBatchBinCommand}"  />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="{Binding Shape}" Cursor="Hand" />
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="{Binding Dpi}" />
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="{Binding Type}" />
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="{Binding Author}" />
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="{Binding Code}" Cursor="Hand" />
+                                    <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"  Content="主表盘" />
+                                    <TextBlock Text="相册表盘" VerticalAlignment="Center"/>
+                                    <ToggleButton   IsChecked="{Binding IsAlbum}"/>
+                                    <TextBlock Text="24位色" VerticalAlignment="Center"/>
+                                    <ToggleButton   IsChecked="{Binding IsColor888}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="读取" Cursor="Hand" Command="{Binding RefreshWatchCommand}" />
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="信息" Cursor="Hand" Command="{Binding OpenInformationCommand}" />
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="5 0 0 0" Content="缩略图"  Cursor="Hand"  Command="{Binding OpenThumbnailCommand}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <ListBox Grid.Row="3" ItemsSource="{Binding Errors}" Foreground="Red">
+                        </ListBox>
+                        <ScrollViewer Grid.Row="4">
+                            <ListBox  x:Name="list" ItemsSource="{Binding DimensionsGroup}" SelectedItem="{Binding SelectDimensions}" SelectedIndex="0">
+                                <beh:Interaction.Triggers>
+                                    <beh:EventTrigger EventName="MouseDoubleClick">
+                                        <beh:InvokeCommandAction Command="{Binding  SetLocationLayerGroupCommand}" CommandParameter="{Binding SelectDimensions}"/>
+                                    </beh:EventTrigger>
+                                </beh:Interaction.Triggers>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.Resources>
+                                    <DataTemplate DataType="{x:Type diymdl:LayerGroup}">
+                                        <GroupBox Header="{Binding GroupCode}" Margin="0 10 0 0" Width="600"  HorizontalAlignment="Left" IsEnabled="{Binding IsEnable}" >
+                                            <Border x:Name="bd">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="20"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Text="{Binding GroupName}" FontSize="14" Background="Black" Foreground="White" Width="300" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Background="Gray" Grid.Row="0" Grid.RowSpan="3">
+                                                            <Image Width="100" Height="100" Grid.Column="0" Grid.RowSpan="3"  Source="{Binding ShowLayer.BitmapSource}"/>
+                                                        </Grid>
+                                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="坐标:"  VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding ShowLayer.Left}"/>
+                                                            <TextBlock Text=","/>
+                                                            <TextBlock Text="{Binding ShowLayer.Top}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="0" Grid.Column="2"  Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="状态:"/>
+                                                            <TextBlock x:Name="ustatus" Text="ok"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="数量:"/>
+                                                            <TextBlock Text="{Binding Layers.Count}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="数量:"/>
+                                                            <TextBlock x:Name="unum" Text="ok"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="尺寸:"/>
+                                                            <TextBlock Text="{Binding ShowLayer.Width}"/>
+                                                            <TextBlock Text=","/>
+                                                            <TextBlock Text="{Binding ShowLayer.Height}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="尺寸:"/>
+                                                            <TextBlock  x:Name="usize" Text="ok">
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
+                                        </GroupBox>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnable}" Value="false">
+                                                <Setter TargetName="bd" Property="Background" Value="Wheat"/>
+                                                <Setter TargetName="bd" Property="Opacity" Value="0.5"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SizeStatus}" Value="false">
+                                                <Setter TargetName="usize"  Property="Foreground" Value="red"/>
+                                                <Setter TargetName="usize"  Property="Text" Value="NG"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding NumStatus}" Value="false">
+                                                <Setter TargetName="unum"  Property="Foreground" Value="red"/>
+                                                <Setter TargetName="unum"  Property="Text" Value="NG"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="false">
+                                                <Setter TargetName="ustatus"  Property="Foreground" Value="red"/>
+                                                <Setter TargetName="ustatus"  Property="Text" Value="NG"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ListBox.Resources>
+                            </ListBox>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </material:DrawerHost>
+    </material:DialogHost>
+</Window>

@@ -1,0 +1,121 @@
+{
+  "devices": [
+    {
+      "id": "smartwatch_default",
+      "name": "Default SmartWatch",
+      "displayName": "Default SmartWatch (390x450)",
+      "manufacturer": "Generic",
+      "model": "SmartWatch",
+      "specifications": {
+        "screenWidth": 390,
+        "screenHeight": 450,
+        "thumbnailWidth": 220,
+        "thumbnailHeight": 220,
+        "cornerRadius": 5,
+        "dpi": 326,
+        "colorDepth": 16,
+        "refreshRate": 60,
+        "hasAOD": true
+      },
+      "constraints": {
+        "maxFileSize": 5242880,
+        "maxImageSize": 1048576,
+        "maxAnimationFrames": 30,
+        "supportedImageFormats": ["png", "jpg", "jpeg"],
+        "maxElementsPerTheme": 50,
+        "maxThemes": 5
+      },
+      "supportedFeatures": {
+        "customFonts": true,
+        "animations": true,
+        "widgets": ["time", "date", "battery", "steps", "weather"],
+        "complications": ["battery", "steps", "heartRate", "weather"],
+        "gestures": ["tap", "swipe", "longPress"],
+        "sensors": ["heartRate", "steps", "gps"]
+      }
+    },
+    {
+      "id": "fitness_tracker",
+      "name": "Fitness Tracker",
+      "displayName": "Fitness Tracker (240x280)",
+      "manufacturer": "Generic",
+      "model": "FitnessTracker",
+      "specifications": {
+        "screenWidth": 240,
+        "screenHeight": 280,
+        "thumbnailWidth": 120,
+        "thumbnailHeight": 140,
+        "cornerRadius": 8,
+        "dpi": 240,
+        "colorDepth": 16,
+        "refreshRate": 30,
+        "hasAOD": false
+      },
+      "constraints": {
+        "maxFileSize": 2097152,
+        "maxImageSize": 524288,
+        "maxAnimationFrames": 10,
+        "supportedImageFormats": ["png", "jpg"],
+        "maxElementsPerTheme": 20,
+        "maxThemes": 3
+      },
+      "supportedFeatures": {
+        "customFonts": false,
+        "animations": false,
+        "widgets": ["time", "date", "battery", "steps"],
+        "complications": ["battery", "steps"],
+        "gestures": ["tap"],
+        "sensors": ["steps", "heartRate"]
+      }
+    },
+    {
+      "id": "round_smartwatch",
+      "name": "Round SmartWatch",
+      "displayName": "Round SmartWatch (360x360)",
+      "manufacturer": "Generic",
+      "model": "RoundWatch",
+      "specifications": {
+        "screenWidth": 360,
+        "screenHeight": 360,
+        "thumbnailWidth": 180,
+        "thumbnailHeight": 180,
+        "cornerRadius": 180,
+        "dpi": 326,
+        "colorDepth": 24,
+        "refreshRate": 60,
+        "hasAOD": true
+      },
+      "constraints": {
+        "maxFileSize": 8388608,
+        "maxImageSize": 2097152,
+        "maxAnimationFrames": 60,
+        "supportedImageFormats": ["png", "jpg", "jpeg", "gif"],
+        "maxElementsPerTheme": 100,
+        "maxThemes": 10
+      },
+      "supportedFeatures": {
+        "customFonts": true,
+        "animations": true,
+        "widgets": ["time", "date", "battery", "steps", "weather", "heartRate", "notifications"],
+        "complications": ["battery", "steps", "heartRate", "weather", "calendar", "music"],
+        "gestures": ["tap", "swipe", "longPress", "rotate"],
+        "sensors": ["heartRate", "steps", "gps", "gyroscope", "accelerometer"]
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "smartwatches",
+      "name": "Smart Watches",
+      "description": "Full-featured smart watches with advanced capabilities",
+      "deviceIds": ["smartwatch_default", "round_smartwatch"]
+    },
+    {
+      "id": "fitness",
+      "name": "Fitness Trackers",
+      "description": "Fitness-focused devices with basic watch functionality",
+      "deviceIds": ["fitness_tracker"]
+    }
+  ],
+  "defaultDevice": "smartwatch_default"
+}
