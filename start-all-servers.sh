@@ -26,11 +26,18 @@ ensure_node_project() {
 
     cd "$project_dir" || exit
 
-    # If node_modules missing OR vite not executable → reinstall
-    if [ ! -d "node_modules" ] || [ -f "package.json" ] && [ -d "node_modules/.bin" ] && [ ! -x "node_modules/.bin/vite" ]; then
+    # Check if package.json exists
+    if [ ! -f "package.json" ]; then
+        echo "No package.json found in $project_name, skipping..."
+        return
+    fi
+
+    # If node_modules missing, install dependencies
+    if [ ! -d "node_modules" ]; then
         echo "Installing dependencies for $project_name..."
-        rm -rf node_modules package-lock.json
         npm install
+    else
+        echo "Dependencies already installed for $project_name"
     fi
 
     # Fix binary permissions
@@ -121,8 +128,8 @@ fi
 # MY VENDOR (WFT-MY-JL)
 # =========================================
 
-MY_FRONTEND="$MY_VENDOR_PATH"
-MY_BACKEND="$MY_VENDOR_PATH/server"
+MY_FRONTEND="$SCRIPT_DIR/WFT-MY-JL"
+MY_BACKEND="$SCRIPT_DIR/WFT-MY-JL/server"
 
 ensure_node_project "$MY_FRONTEND" "MY Frontend"
 ensure_node_project "$MY_BACKEND" "MY Backend"

@@ -20,7 +20,7 @@ const WATCH_ROUTES: WatchRoute[] = [
   {
     vendor: 'MY',
     board: 'JL',
-    path: '/Users/mokshjain/Desktop/WFT-MY-JL/index.html',
+    path: '../WFT-MY-JL/index.html',
     port: 5176
   }
 ]
